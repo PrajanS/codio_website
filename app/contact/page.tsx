@@ -1,106 +1,146 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import Reveal from '../components/Reveal';
+import WordReveal from '../components/WordReveal';
 import ContactForm from '../components/ContactForm';
-import { IconMail, IconPhone, IconPin, IconClock } from '../components/Icon';
+import { IconMail, IconPin, IconClock } from '../components/Icon';
 
 export const metadata: Metadata = {
-  title: 'Contact — Start a Project',
-  description: "Tell us about your roadmap. We'll respond within one business day with a concrete next step.",
+  title: 'Contact — Start a project',
+  description:
+    "Tell us about your project. One business day, no sales loop. We'll come back with concrete next steps.",
 };
+
+const LINES = [
+  { icon: <IconMail size={16} />, label: 'Mail', value: 'hello@imax.studio', href: 'mailto:hello@imax.studio' },
+  { icon: <IconPin size={16} />, label: 'Studio', value: 'San Francisco · Remote-first' },
+  { icon: <IconClock size={16} />, label: 'Hours', value: 'Mon — Fri · 09 — 18 PT' },
+];
+
+const FAQS = [
+  {
+    q: 'How fast can you start?',
+    a: 'Median kickoff is eleven days from first call. Two slots open for August 2026. Urgent fixes for existing partners always jump the queue.',
+  },
+  {
+    q: 'What does an engagement cost?',
+    a: 'A Sprint is fixed at $18k for two weeks. A Build runs $80k — $260k depending on scope. An Embed is a day-rate with a monthly cap.',
+  },
+  {
+    q: 'Do you sign NDAs?',
+    a: 'Yes — happy to sign yours, or we have a one-page mutual NDA we can send in two minutes.',
+  },
+  {
+    q: 'Will my code be readable after you leave?',
+    a: 'That is the point. Every project ends with an architecture brief, a README that actually documents the system, and a one-hour walk-through with your team.',
+  },
+];
 
 export default function ContactPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center">
-        <div className="container-x">
-          <Reveal>
-            <span className="eyebrow">Get in touch</span>
-            <h1 className="text-[clamp(2.6rem,2rem+2.8vw,4.4rem)] font-display font-bold leading-[1.1] tracking-tight mt-4 mb-4">
-              Let's build something <span className="text-gradient">worth building.</span>
-            </h1>
-            <p className="text-lg text-[var(--color-text-muted)] max-w-[680px] mx-auto">
-              One business day, no sales loop. Tell us where you are — we'll come back with concrete next steps.
-            </p>
-          </Reveal>
+      {/* ============ HERO ============ */}
+      <section className="frame pt-16 pb-16 max-md:pt-10 max-md:pb-10">
+        <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
+          <span className="mono ink-mute">[ 05 — contact ]</span>
+          <span className="live">Open · reply &lt; 24h</span>
         </div>
-      </section>
 
-      <section className="pb-24">
-        <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <Reveal>
-            <div className="glass glass-border p-8 h-full">
-              <span className="eyebrow">Direct lines</span>
-              <h2 className="text-2xl font-display font-bold mt-4 mb-3">Talk to a human.</h2>
-              <p className="text-[var(--color-text-muted)] mb-6">
-                The form goes straight to a founder. You can also reach us the old-fashioned way.
+        <WordReveal
+          as="h1"
+          className="font-display leading-[0.93] tracking-[-0.04em] text-[clamp(3rem,1.6rem+6vw,9rem)]"
+          italic={[3, 4]}
+          signal={[4]}
+        >
+          Tell us what you&apos;re building.
+        </WordReveal>
+
+        <div className="grid grid-cols-12 gap-6 mt-10">
+          <div className="col-span-12 md:col-span-6 md:col-start-2">
+            <Reveal delay={250}>
+              <p className="text-lg ink-mute leading-relaxed">
+                One business day, no sales loop. Tell us where you are — first call, mid-build, or trying to rescue something. We&apos;ll come back with concrete next steps.
               </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
-              <ul className="list-none p-0 space-y-5">
-                <ContactItem
-                  icon={<IconMail size={18} />}
-                  label="Email"
-                  href="mailto:hello@imax.dev"
-                  value="hello@imax.dev"
-                />
-                <ContactItem
-                  icon={<IconPhone size={18} />}
-                  label="Phone"
-                  href="tel:+10000000000"
-                  value="+1 (000) 000-0000"
-                />
-                <ContactItem
-                  icon={<IconPin size={18} />}
-                  label="Office"
-                  href="#"
-                  value="Remote-first · HQ in San Francisco, CA"
-                />
-                <ContactItem
-                  icon={<IconClock size={18} />}
-                  label="Hours"
-                  href="#"
-                  value="Mon–Fri · 9am to 6pm PT"
-                />
+      {/* ============ FORM + LINES ============ */}
+      <section className="frame pb-24">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-16 items-start">
+          {/* Left column — lines */}
+          <aside className="col-span-12 md:col-span-4">
+            <Reveal>
+              <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
+                <span className="index">Direct lines</span>
+              </div>
+
+              <ul className="list-none p-0 space-y-6">
+                {LINES.map((l) => (
+                  <li key={l.label}>
+                    <div className="flex items-baseline gap-3 mono ink-mute mb-1">
+                      <span aria-hidden="true">{l.icon}</span>
+                      <span>{l.label}</span>
+                    </div>
+                    {l.href ? (
+                      <a href={l.href} className="font-display text-xl u-link ink" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                        {l.value}
+                      </a>
+                    ) : (
+                      <div className="font-display text-xl ink" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>{l.value}</div>
+                    )}
+                  </li>
+                ))}
               </ul>
-            </div>
-          </Reveal>
 
-          <Reveal>
-            <ContactForm />
-          </Reveal>
+              <div className="mt-12 hairline pt-6 mono ink-mute leading-relaxed">
+                Form goes straight to a founder. Avg. reply 4h 12m during business hours.
+              </div>
+            </Reveal>
+          </aside>
+
+          {/* Right column — form */}
+          <div className="col-span-12 md:col-span-7 md:col-start-6">
+            <Reveal>
+              <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
+                <span className="index">Project brief</span>
+                <span className="mono ink-faint">— 4 fields</span>
+              </div>
+              <ContactForm />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">Frequently asked</span>
+            <span className="mono ink-faint">/ 02</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-12 gap-6">
+          {FAQS.map((f, i) => (
+            <Reveal
+              key={f.q}
+              className={`col-span-12 md:col-span-6 ${i % 2 === 1 ? 'md:translate-y-10' : ''}`}
+              delay={i * 80}
+            >
+              <details className="hairline-b py-6 group">
+                <summary className="flex items-baseline justify-between cursor-none list-none">
+                  <h3 className="font-display text-2xl leading-tight tracking-tight" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                    {f.q}
+                  </h3>
+                  <span className="mono ink-mute group-open:rotate-45 transition-transform duration-300">+</span>
+                </summary>
+                <p className="text-base ink-mute leading-relaxed mt-4 max-w-[62ch]">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
         </div>
       </section>
     </>
-  );
-}
-
-function ContactItem({ icon, label, href, value }: { icon: ReactNode; label: string; href: string; value: string }) {
-  const isLink = href && href !== '#';
-  const content = (
-    <>
-      <span className="grid place-items-center w-10 h-10 rounded-[10px] bg-gradient-soft border border-[var(--color-border-strong)] shrink-0 text-[#a5b4fc]">
-        {icon}
-      </span>
-      <span>
-        <span className="block text-xs tracking-[0.14em] uppercase text-[var(--color-text-dim)] mb-0.5">
-          {label}
-        </span>
-        <span className={isLink ? 'hover:text-[var(--color-neon-cyan)] transition-colors' : ''}>
-          {value}
-        </span>
-      </span>
-    </>
-  );
-
-  return (
-    <li>
-      {isLink ? (
-        <a href={href} className="flex gap-3 items-start text-[var(--color-text)]">
-          {content}
-        </a>
-      ) : (
-        <div className="flex gap-3 items-start text-[var(--color-text)]">{content}</div>
-      )}
-    </li>
   );
 }

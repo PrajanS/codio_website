@@ -1,22 +1,27 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
-import TiltCard from './TiltCard';
-import { IconWeb, IconMobile, IconCloud } from './Icon';
+import { useState } from 'react';
+import Reveal from './Reveal';
+import StatCounter from './StatCounter';
 
 type Category = 'web' | 'mobile' | 'cloud';
 
 type Case = {
+  n: string;
   title: string;
+  client: string;
   tag: string;
   category: Category;
   blurb: string;
   metrics: { value: string; label: string }[];
+  year: string;
 };
 
 const CASES: Case[] = [
   {
-    title: 'Northwind Retail — Checkout 2.0',
+    n: '01',
+    title: 'Checkout 2.0',
+    client: 'Northwind Retail',
     tag: 'Web · E-commerce',
     category: 'web',
     blurb: 'Rebuilt a legacy checkout into a Next.js + Stripe flow that lifted conversion across mobile and desktop.',
@@ -24,9 +29,12 @@ const CASES: Case[] = [
       { value: '+34%', label: 'Conversion' },
       { value: '−62%', label: 'Page weight' },
     ],
+    year: '2026',
   },
   {
-    title: 'Lumen Health — Cloud Re-Platform',
+    n: '02',
+    title: 'Cloud Re-Platform',
+    client: 'Lumen Health',
     tag: 'Cloud · Healthcare',
     category: 'cloud',
     blurb: 'Migrated a HIPAA-bound workload from EC2 to ECS Fargate with full IaC and 24/7 observability.',
@@ -34,61 +42,68 @@ const CASES: Case[] = [
       { value: '−41%', label: 'Monthly spend' },
       { value: '99.99%', label: 'Uptime' },
     ],
+    year: '2025',
   },
   {
-    title: 'Roam Travel — Companion App',
+    n: '03',
+    title: 'Companion App',
+    client: 'Roam Travel',
     tag: 'Mobile · Travel',
     category: 'mobile',
-    blurb: 'Cross-platform React Native app with offline-first itineraries — shipped iOS & Android in parallel.',
+    blurb: 'Cross-platform React Native app with offline-first itineraries — shipped iOS and Android in parallel.',
     metrics: [
       { value: '4.8★', label: 'App Store rating' },
       { value: '90k', label: 'Installs in Q1' },
     ],
+    year: '2025',
   },
   {
-    title: 'Finch Analytics — Dashboard',
+    n: '04',
+    title: 'Trade Desk Dashboard',
+    client: 'Finch Analytics',
     tag: 'Web · Fintech',
     category: 'web',
-    blurb: 'Real-time analytics dashboard with virtualized tables and WebSocket streams for trade desks.',
+    blurb: 'Real-time analytics dashboard with virtualised tables and WebSocket streams for twelve trade desks.',
     metrics: [
       { value: '<80ms', label: 'p95 render' },
-      { value: '12 desks', label: 'Live now' },
+      { value: '12', label: 'Desks live' },
     ],
+    year: '2024',
   },
   {
-    title: 'Atlas Logistics — Driver App',
+    n: '05',
+    title: 'Driver App',
+    client: 'Atlas Logistics',
     tag: 'Mobile · Logistics',
     category: 'mobile',
     blurb: 'Native Android app for drivers with offline route caching and barcode-driven proof-of-delivery.',
     metrics: [
       { value: '−27%', label: 'Time per stop' },
-      { value: '6 weeks', label: 'To launch' },
+      { value: '6 wks', label: 'To launch' },
     ],
+    year: '2024',
   },
   {
-    title: 'Vector AI — ML Inference Cluster',
-    tag: 'Cloud · AI/ML',
+    n: '06',
+    title: 'ML Inference Cluster',
+    client: 'Vector AI',
+    tag: 'Cloud · AI / ML',
     category: 'cloud',
-    blurb: 'GPU autoscaler on EKS with cold-start mitigation, cutting inference latency for a CV product.',
+    blurb: 'GPU autoscaler on EKS with cold-start mitigation, cutting inference latency for a computer-vision product.',
     metrics: [
       { value: '5.2×', label: 'Throughput' },
       { value: '−54%', label: 'GPU spend' },
     ],
+    year: '2024',
   },
 ];
 
-const FILTERS: { key: 'all' | Category; label: string }[] = [
-  { key: 'all', label: 'All work' },
-  { key: 'web', label: 'Web' },
-  { key: 'mobile', label: 'Mobile' },
-  { key: 'cloud', label: 'Cloud' },
+const FILTERS: { key: 'all' | Category; label: string; n: string }[] = [
+  { key: 'all', label: 'All work', n: '00' },
+  { key: 'web', label: 'Web', n: '01' },
+  { key: 'mobile', label: 'Mobile', n: '02' },
+  { key: 'cloud', label: 'Cloud', n: '03' },
 ];
-
-const ICON_BY_CATEGORY: Record<Category, ReactNode> = {
-  web: <IconWeb size={64} strokeWidth={1.2} />,
-  mobile: <IconMobile size={64} strokeWidth={1.2} />,
-  cloud: <IconCloud size={64} strokeWidth={1.2} />,
-};
 
 export default function PortfolioGrid() {
   const [filter, setFilter] = useState<'all' | Category>('all');
@@ -96,48 +111,135 @@ export default function PortfolioGrid() {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 justify-center mb-12">
-        {FILTERS.map((f) => {
-          const active = filter === f.key;
-          return (
-            <button
-              key={f.key}
-              type="button"
-              onClick={() => setFilter(f.key)}
-              className={`px-5 py-2.5 rounded-full text-sm transition-all border ${
-                active
-                  ? 'bg-gradient-brand border-transparent text-white shadow-[0_8px_24px_-10px_rgba(99,102,241,0.6)]'
-                  : 'bg-white/[0.03] border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:border-[var(--color-border-strong)]'
-              }`}
-            >
-              {f.label}
-            </button>
-          );
-        })}
+      {/* Filter bar */}
+      <div className="frame">
+        <div className="hairline-b pb-3 mb-8 flex items-baseline justify-between flex-wrap gap-4">
+          <div className="flex items-baseline gap-6 flex-wrap">
+            <span className="index">Filter</span>
+            {FILTERS.map((f) => {
+              const active = filter === f.key;
+              return (
+                <button
+                  key={f.key}
+                  type="button"
+                  onClick={() => setFilter(f.key)}
+                  className={`relative flex items-baseline gap-2 text-base transition-colors ${active ? 'ink' : 'ink-mute hover:ink'}`}
+                >
+                  <span className="mono ink-faint">{f.n}</span>
+                  <span className={`font-display tracking-tight ${active ? 'italic signal' : ''}`}
+                        style={{ fontVariationSettings: active ? '"opsz" 144, "SOFT" 100' : '"opsz" 144, "SOFT" 40' }}>
+                    {f.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <span className="mono ink-faint">
+            <StatCounter target={visible.length} /> / {CASES.length} shown
+          </span>
+        </div>
       </div>
 
-      <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-        {visible.map((c) => (
-          <TiltCard key={c.title} max={5} className="glass glass-border overflow-hidden rounded-2xl">
-            <div className="aspect-[16/10] grid place-items-center bg-gradient-soft border-b border-[var(--color-border)] text-[#a5b4fc] relative z-[1]">
-              {ICON_BY_CATEGORY[c.category]}
-            </div>
-            <div className="p-6 relative z-[1]">
-              <span className="inline-block text-xs tracking-[0.16em] uppercase text-[#93c5fd] mb-3">{c.tag}</span>
-              <h3 className="text-xl font-display font-bold mb-2">{c.title}</h3>
-              <p className="text-sm text-[var(--color-text-muted)]">{c.blurb}</p>
-              <div className="flex gap-6 mt-4 pt-4 border-t border-[var(--color-border)]">
-                {c.metrics.map((m) => (
-                  <div key={m.label}>
-                    <strong className="font-display block text-lg text-gradient">{m.value}</strong>
-                    <span className="text-xs text-[var(--color-text-dim)]">{m.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </TiltCard>
-        ))}
+      {/* Cases — large editorial cards */}
+      <div className="frame">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-16">
+          {visible.map((c, i) => (
+            <Reveal
+              key={c.n}
+              className={`col-span-12 md:col-span-6 ${i % 4 === 1 ? 'md:translate-y-16' : ''} ${i % 4 === 3 ? 'md:translate-y-16' : ''}`}
+              delay={i * 60}
+            >
+              <article className="group">
+                {/* Visual slot */}
+                <div className="slot aspect-[4/3] mb-6">
+                  <span className="slot-tag">{c.tag}</span>
+                  <CaseArtwork category={c.category} n={c.n} />
+                </div>
+
+                <div className="flex items-baseline justify-between mb-3">
+                  <span className="mono ink-faint">{c.n} · {c.year}</span>
+                  <span className="mono ink-mute">{c.client}</span>
+                </div>
+
+                <h3 className="font-display text-[clamp(1.8rem,1.1rem+1.4vw,2.8rem)] leading-[1.02] tracking-tight mb-3"
+                    style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                  {c.title}
+                </h3>
+
+                <p className="text-base ink-mute leading-relaxed mb-6 max-w-[58ch]">{c.blurb}</p>
+
+                <div className="flex gap-10 hairline pt-5">
+                  {c.metrics.map((m) => (
+                    <div key={m.label}>
+                      <div className="font-display text-3xl tracking-tight signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                        {m.value}
+                      </div>
+                      <div className="mono ink-mute mt-1">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        {visible.length === 0 && (
+          <div className="hairline pt-12 mono ink-mute text-center">
+            No projects in this discipline yet — yours could be the first.
+          </div>
+        )}
       </div>
     </>
+  );
+}
+
+function CaseArtwork({ category, n }: { category: Category; n: string }) {
+  // SVG kinetic patterns — no stock imagery, no gradient slop
+  const common = 'absolute inset-0 w-full h-full';
+  if (category === 'web') {
+    return (
+      <svg viewBox="0 0 400 300" className={common} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="300" fill="var(--color-paper-2)" />
+        {Array.from({ length: 26 }).map((_, i) => (
+          <line key={i} x1={i * 16} y1="0" x2={i * 16 - 80} y2="300" stroke="var(--color-ink)" strokeWidth="0.5" opacity="0.18" />
+        ))}
+        <text x="20" y="270" fontFamily="var(--font-display)" fontSize="120" fill="var(--color-ink)" opacity="0.85" style={{ fontStyle: 'italic' }}>
+          {n}
+        </text>
+        <text x="350" y="40" fontFamily="var(--font-mono)" fontSize="9" textAnchor="end" fill="var(--color-ink)" opacity="0.5">
+          WEB / 200 OK
+        </text>
+      </svg>
+    );
+  }
+  if (category === 'mobile') {
+    return (
+      <svg viewBox="0 0 400 300" className={common} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="300" fill="var(--color-paper-2)" />
+        {Array.from({ length: 12 }).map((_, i) => (
+          <rect key={i} x={20 + i * 30} y={40 + (i % 2) * 30} width="22" height={180 - (i % 3) * 30} fill="none" stroke="var(--color-ink)" strokeWidth="0.6" opacity="0.32" rx="3" />
+        ))}
+        <text x="20" y="270" fontFamily="var(--font-display)" fontSize="120" fill="var(--color-signal)" opacity="0.85">
+          {n}
+        </text>
+        <text x="380" y="40" fontFamily="var(--font-mono)" fontSize="9" textAnchor="end" fill="var(--color-ink)" opacity="0.5">
+          iOS · ANDROID
+        </text>
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 400 300" className={common} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="400" height="300" fill="var(--color-paper-2)" />
+      {Array.from({ length: 18 }).map((_, i) => (
+        <circle key={i} cx={(i * 47) % 400} cy={(i * 67) % 300} r={4 + (i % 4) * 6} fill="none" stroke="var(--color-ink)" strokeWidth="0.6" opacity="0.25" />
+      ))}
+      <text x="20" y="270" fontFamily="var(--font-display)" fontSize="120" fill="var(--color-ink)" opacity="0.85" style={{ fontStyle: 'italic' }}>
+        {n}
+      </text>
+      <text x="380" y="40" fontFamily="var(--font-mono)" fontSize="9" textAnchor="end" fill="var(--color-ink)" opacity="0.5">
+        99.99% UP
+      </text>
+    </svg>
   );
 }

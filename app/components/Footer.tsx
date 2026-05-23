@@ -1,64 +1,107 @@
 import Link from 'next/link';
+import Marquee from './Marquee';
+
+const SERVICES = [
+  { href: '/services#web', label: 'Web' },
+  { href: '/services#mobile', label: 'Mobile' },
+  { href: '/services#cloud', label: 'Cloud' },
+  { href: '/services#design', label: 'Product Design' },
+];
+
+const STUDIO = [
+  { href: '/about', label: 'Studio' },
+  { href: '/portfolio', label: 'Selected work' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const NETWORK = [
+  { href: 'https://github.com', label: 'GitHub' },
+  { href: 'https://www.linkedin.com', label: 'LinkedIn' },
+  { href: 'https://read.cv', label: 'Read.cv' },
+];
 
 export default function Footer() {
   return (
-    <footer className="mt-32 pt-16 pb-5 border-t border-[var(--color-border)] bg-gradient-to-b from-transparent to-[rgba(11,15,36,0.6)]">
-      <div className="container-x">
-        <div className="grid gap-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
-            <Link href="/" className="inline-flex items-center gap-2 font-display font-bold text-[1.4rem] tracking-tight mb-4">
-              <span className="grid place-items-center w-9 h-9 rounded-[10px] bg-gradient-brand text-white font-extrabold">i</span>
-              <span>iMax</span>
-            </Link>
-            <p className="text-sm text-[var(--color-text-muted)] max-w-[320px]">
-              A senior software & IT services team helping ambitious companies design, build, and scale digital products.
-            </p>
+    <footer className="mt-32 bg-ink text-[var(--color-paper)]">
+      {/* Big mark marquee */}
+      <div className="border-y border-[color:var(--color-paper)]/15 py-8">
+        <Marquee speed={88} className="text-[var(--color-paper)]">
+          <span className="font-display italic text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+            let&apos;s build something
+          </span>
+          <span className="font-display text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+            worth keeping —
+          </span>
+          <span className="font-display italic text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+            let&apos;s build something
+          </span>
+          <span className="font-display text-[clamp(4rem,12vw,12rem)] leading-none tracking-[-0.04em] mr-12" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+            worth keeping —
+          </span>
+        </Marquee>
+      </div>
+
+      <div className="frame pt-20 pb-10">
+        <div className="grid gap-12 md:grid-cols-12">
+          {/* Left: contact pitch */}
+          <div className="md:col-span-5">
+            <div className="mono ink-faint mb-4" style={{ color: 'var(--color-paper-faint)' }}>
+              [ 01 — start a project ]
+            </div>
+            <h2 className="font-display text-[clamp(2.2rem,1.4rem+2vw,3.6rem)] leading-[0.95] tracking-tight mb-8" style={{ color: 'var(--color-paper)' }}>
+              Tell us what you&apos;re building.<br />
+              <em className="italic" style={{ color: 'var(--color-signal)' }}>We&apos;ll reply by tomorrow.</em>
+            </h2>
+            <div className="space-y-2">
+              <a href="mailto:hello@imax.studio" className="block font-display text-2xl u-link" style={{ color: 'var(--color-paper)' }}>
+                hello@imax.studio
+              </a>
+              <Link href="/contact" className="block mono u-link" style={{ color: 'var(--color-paper-mute)' }}>
+                Book a 30-min scoping call ↗
+              </Link>
+            </div>
           </div>
 
-          <FooterCol
-            title="Company"
-            items={[
-              { href: '/about', label: 'About' },
-              { href: '/portfolio', label: 'Work' },
-              { href: '/contact', label: 'Contact' },
-            ]}
-          />
-          <FooterCol
-            title="Services"
-            items={[
-              { href: '/services#web', label: 'Web Development' },
-              { href: '/services#mobile', label: 'Mobile Development' },
-              { href: '/services#cloud', label: 'Cloud Solutions' },
-            ]}
-          />
-          <FooterCol
-            title="Contact"
-            items={[
-              { href: 'mailto:hello@imax.dev', label: 'hello@imax.dev' },
-              { href: 'tel:+10000000000', label: '+1 (000) 000-0000' },
-            ]}
-          />
+          {/* Right: index columns */}
+          <div className="md:col-span-7 grid grid-cols-3 gap-6 max-sm:grid-cols-1">
+            <FCol title="Services" items={SERVICES} />
+            <FCol title="Studio" items={STUDIO} />
+            <FCol title="Elsewhere" items={NETWORK} external />
+          </div>
         </div>
 
-        <div className="mt-12 pt-5 border-t border-[var(--color-border)] flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--color-text-dim)] max-sm:flex-col max-sm:text-center">
-          <span>© {new Date().getFullYear()} iMax. All rights reserved.</span>
-          <span>Built by the iMax engineering team.</span>
+        <div className="mt-24 pt-6 border-t border-[color:var(--color-paper)]/15 flex flex-wrap items-center justify-between gap-3 mono" style={{ color: 'var(--color-paper-faint)' }}>
+          <span>© {new Date().getFullYear()} imax studio</span>
+          <span>San Francisco · Remote-first</span>
+          <span>v.2026.05 — built in-house</span>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, items }: { title: string; items: { href: string; label: string }[] }) {
+function FCol({ title, items, external }: { title: string; items: { href: string; label: string }[]; external?: boolean }) {
   return (
     <div>
-      <h4 className="text-sm uppercase tracking-[0.16em] font-semibold mb-4 text-[var(--color-text)]">{title}</h4>
+      <h4 className="mono mb-5" style={{ color: 'var(--color-paper-faint)' }}>{title}</h4>
       <ul className="list-none p-0 space-y-3">
         {items.map((i) => (
           <li key={i.href}>
-            <Link href={i.href} className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-neon-cyan)] transition-colors">
-              {i.label}
-            </Link>
+            {external ? (
+              <a
+                href={i.href}
+                target="_blank"
+                rel="noreferrer"
+                className="u-link text-base"
+                style={{ color: 'var(--color-paper)' }}
+              >
+                {i.label} ↗
+              </a>
+            ) : (
+              <Link href={i.href} className="u-link text-base" style={{ color: 'var(--color-paper)' }}>
+                {i.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

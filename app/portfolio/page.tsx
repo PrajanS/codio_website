@@ -1,49 +1,69 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Reveal from '../components/Reveal';
+import WordReveal from '../components/WordReveal';
+import MagneticButton from '../components/MagneticButton';
 import PortfolioGrid from '../components/PortfolioGrid';
 
 export const metadata: Metadata = {
-  title: 'Work — Case Studies',
-  description: 'A selection of recent iMax engagements across web, mobile, and cloud.',
+  title: 'Selected work — Archive 2024 — 2026',
+  description: 'A selection of recent iMax engagements across web, mobile and cloud.',
 };
 
 export default function PortfolioPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center">
-        <div className="container-x">
-          <Reveal>
-            <span className="eyebrow">Selected work</span>
-            <h1 className="text-[clamp(2.6rem,2rem+2.8vw,4.4rem)] font-display font-bold leading-[1.1] tracking-tight mt-4 mb-4">
-              Outcomes, not <span className="text-gradient">just outputs.</span>
-            </h1>
-            <p className="text-lg text-[var(--color-text-muted)] max-w-[680px] mx-auto">
-              A snapshot of recent engagements — what we built, who we built it with, and what it changed for the business.
-            </p>
-          </Reveal>
+      {/* ============ HERO ============ */}
+      <section className="frame pt-16 pb-16 max-md:pt-10 max-md:pb-10">
+        <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
+          <span className="mono ink-mute">[ 03 — selected work ]</span>
+          <span className="mono ink-faint">24 projects · 2017 — 2026</span>
+        </div>
+
+        <WordReveal
+          as="h1"
+          className="font-display leading-[0.93] tracking-[-0.04em] text-[clamp(3rem,1.6rem+6vw,9rem)]"
+          italic={[0, 1, 2]}
+          signal={[2]}
+        >
+          Outcomes, not outputs.
+        </WordReveal>
+
+        <div className="grid grid-cols-12 gap-6 mt-10">
+          <div className="col-span-12 md:col-span-6 md:col-start-2">
+            <Reveal delay={240}>
+              <p className="text-lg ink-mute leading-relaxed">
+                A snapshot of recent engagements — what we built, who we built it with, and what it changed for the business. Filter by discipline.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
+      {/* ============ GRID ============ */}
       <section className="pb-24">
-        <div className="container-x">
-          <PortfolioGrid />
-        </div>
+        <PortfolioGrid />
       </section>
 
-      <section className="py-24 max-md:py-16">
-        <div className="container-x">
-          <Reveal>
-            <div className="relative overflow-hidden p-16 max-md:p-10 text-center bg-gradient-soft border border-[var(--color-border-strong)] rounded-3xl">
-              <span className="eyebrow">Your project, next</span>
-              <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">Want to see your name in this grid?</h2>
-              <p className="max-w-[540px] mx-auto mb-8 text-[var(--color-text-muted)]">
+      {/* ============ CTA ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <Reveal>
+          <div className="grid grid-cols-12 gap-6 items-baseline">
+            <div className="col-span-12 md:col-span-8">
+              <span className="index">Your project, next</span>
+              <h2 className="font-display mt-6 text-[clamp(2.4rem,1.4rem+3vw,5rem)] leading-[0.95] tracking-[-0.03em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                Want to see your name <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>in the archive?</em>
+              </h2>
+              <p className="text-base ink-mute mt-6 max-w-[55ch]">
                 Most of these started with one email. Yours can too.
               </p>
-              <Link href="/contact" className="btn btn-primary btn-arrow">Start a project</Link>
             </div>
-          </Reveal>
-        </div>
+            <div className="col-span-12 md:col-span-4 md:text-right">
+              <MagneticButton href="/contact" className="btn btn-primary">
+                Start a project
+              </MagneticButton>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </>
   );

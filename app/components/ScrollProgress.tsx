@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 export default function ScrollProgress() {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -12,8 +12,8 @@ export default function ScrollProgress() {
       if (!el) return;
       const doc = document.documentElement;
       const max = doc.scrollHeight - doc.clientHeight;
-      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-      el.style.transform = `scaleX(${pct / 100})`;
+      const pct = max > 0 ? window.scrollY / max : 0;
+      el.style.transform = `scaleX(${pct})`;
     };
     const onScroll = () => {
       if (raf) return;
@@ -33,12 +33,8 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 inset-x-0 h-[2px] z-[100] pointer-events-none">
-      <div
-        ref={ref}
-        className="h-full origin-left bg-gradient-brand"
-        style={{ transform: 'scaleX(0)', willChange: 'transform' }}
-      />
+    <div className="scroll-progress" aria-hidden="true">
+      <span ref={ref} style={{ transform: 'scaleX(0)' }} />
     </div>
   );
 }

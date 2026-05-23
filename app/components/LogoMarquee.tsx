@@ -1,4 +1,6 @@
-const LOGOS = [
+import Marquee from './Marquee';
+
+const CLIENTS = [
   'Northwind',
   'Lumen Health',
   'Roam Travel',
@@ -12,20 +14,15 @@ const LOGOS = [
 ];
 
 export default function LogoMarquee() {
-  const items = [...LOGOS, ...LOGOS];
   return (
-    <div className="marquee-mask overflow-hidden">
-      <div className="marquee-track">
-        {items.map((name, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-3 text-[var(--color-text-dim)] hover:text-[var(--color-text-muted)] transition-colors whitespace-nowrap"
-          >
-            <span className="inline-block w-2 h-2 rounded-sm bg-gradient-brand opacity-70" />
-            <span className="font-display text-lg tracking-[-0.01em] font-semibold">{name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Marquee speed={56}>
+      {CLIENTS.map((c, i) => (
+        <span key={i} className="inline-flex items-center gap-12 font-display text-[clamp(1.6rem,1rem+1vw,2.2rem)] tracking-tight ink"
+              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+          {c}
+          <span className="mono ink-faint">/{String(i + 1).padStart(2, '0')}</span>
+        </span>
+      ))}
+    </Marquee>
   );
 }
