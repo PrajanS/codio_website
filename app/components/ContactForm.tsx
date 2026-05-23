@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { processContactRequest } from '../contact/handler';
 
 type Status = { kind: 'idle' | 'success' | 'error'; message?: string };
-
-// Replace with your Web3Forms access key (https://web3forms.com)
-const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
@@ -49,19 +47,15 @@ export default function ContactForm() {
     setStatus({ kind: 'idle' });
     try {
       const data = new FormData(form);
-      data.append('access_key', WEB3FORMS_ACCESS_KEY);
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: data,
-      });
-      const json = await res.json();
-      if (json.success) {
-        setStatus({ kind: 'success', message: "Thanks — we'll get back to you within one business day." });
+      const result = await processContactRequest(data);
+      
+      if (result.success) {
+        setStatus({ kind: 'success', message: result.message });
         form.reset();
       } else {
-        throw new Error(json.message || 'Submission failed');
+        throw new Error(result.message);
       }
-    } catch {
+    } catch (err: any) {
       setStatus({
         kind: 'error',
         message: 'Something went wrong. Please email us directly at hello@imax.dev.',
@@ -126,13 +120,6 @@ export default function ContactForm() {
         >
           {status.message}
         </div>
-      )}
-
-      {WEB3FORMS_ACCESS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY' && (
-        <p className="mt-4 text-xs text-[var(--color-text-dim)]">
-          ⚠ Replace <code className="text-[var(--color-neon-cyan)]">WEB3FORMS_ACCESS_KEY</code> in <code>ContactForm.tsx</code> with your key from{' '}
-          <a href="https://web3forms.com" className="underline" target="_blank" rel="noreferrer">web3forms.com</a>.
-        </p>
       )}
     </form>
   );
