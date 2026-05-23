@@ -5,15 +5,20 @@ import { processContactRequest } from '../contact/handler';
 
 type Status = { kind: 'idle' | 'success' | 'error'; message?: string };
 
+const BUDGETS = ['Under $25k', '$25k — $80k', '$80k — $250k', '$250k +', 'Not sure yet'];
+const TIMING = ['ASAP', 'Next 30 days', '1 — 3 months', '3 — 6 months', '6 months +'];
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
   const [sending, setSending] = useState(false);
+  const [budget, setBudget] = useState('');
+  const [timing, setTiming] = useState('');
 
   const validate = (form: HTMLFormElement) => {
     const errors: Record<string, boolean> = {};
-    const fields = ['name', 'email', 'message'];
-    for (const name of fields) {
+    const required = ['name', 'email', 'message'];
+    for (const name of required) {
       const input = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
       if (!input) continue;
       const value = (input.value || '').trim();
@@ -26,14 +31,13 @@ export default function ContactForm() {
     return Object.keys(errors).length === 0;
   };
 
-  const onChange = (name: string) => {
-    if (invalid[name]) {
-      setInvalid((prev) => {
-        const next = { ...prev };
-        delete next[name];
-        return next;
-      });
-    }
+  const clearError = (name: string) => {
+    if (!invalid[name]) return;
+    setInvalid((prev) => {
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -48,17 +52,18 @@ export default function ContactForm() {
     try {
       const data = new FormData(form);
       const result = await processContactRequest(data);
-      
       if (result.success) {
         setStatus({ kind: 'success', message: result.message });
         form.reset();
+        setBudget('');
+        setTiming('');
       } else {
-        throw new Error(result.message);
+        setStatus({ kind: 'error', message: result.message });
       }
-    } catch (err: any) {
+    } catch {
       setStatus({
         kind: 'error',
-        message: 'Something went wrong. Please email us directly at hello@imax.dev.',
+        message: 'Something went wrong. Please email hello@imax.studio directly.',
       });
     } finally {
       setSending(false);
@@ -66,57 +71,102 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} noValidate className="glass glass-border p-8 max-md:p-6">
-      <div className="grid grid-cols-2 gap-4 mb-5 max-sm:grid-cols-1">
-        <FieldText name="name" label="Name" invalid={!!invalid.name} onValueChange={() => onChange('name')} placeholder="Your full name" required />
-        <FieldText name="email" type="email" label="Email" invalid={!!invalid.email} onValueChange={() => onChange('email')} placeholder="you@company.com" required />
-      </div>
-      <div className="mb-5">
-        <FieldText name="company" label="Company" placeholder="Optional" />
-      </div>
-      <div className="mb-5">
-        <label className="block text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-2">
-          What can we help with?
-        </label>
-        <div className={`field ${invalid.budget ? 'invalid' : ''}`}>
-          <select name="service" defaultValue="">
-            <option value="" disabled>Select a service</option>
-            <option value="web">Web Development</option>
-            <option value="mobile">Mobile App Development</option>
-            <option value="cloud">Cloud Solutions</option>
-            <option value="other">Something else</option>
-          </select>
-        </div>
-      </div>
-      <div className="mb-5">
-        <label className="block text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-2">
-          Tell us about your project <span className="text-[var(--color-neon-cyan)]">*</span>
-        </label>
-        <div className={`field ${invalid.message ? 'invalid' : ''}`}>
-          <textarea
-            name="message"
-            required
-            placeholder="Goals, timeline, anything that will help us help you."
-            onChange={() => onChange('message')}
-          />
-        </div>
+    <form onSubmit={onSubmit} noValidate className="space-y-1">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-1 max-sm:grid-cols-1">
+        <Line name="name" label="01 — your name" placeholder="Maria Chen" invalid={!!invalid.name} onValueChange={() => clearError('name')} required />
+        <Line name="email" type="email" label="02 — your email" placeholder="maria@northwind.com" invalid={!!invalid.email} onValueChange={() => clearError('email')} required />
       </div>
 
-      {/* Web3Forms honeypot */}
+      <Line name="company" label="03 — company (optional)" placeholder="Northwind Retail" />
+
+      {/* Budget pills */}
+      <fieldset className="field-line hairline-b">
+        <label>04 — budget</label>
+        <input type="hidden" name="budget" value={budget} />
+        <div className="flex flex-wrap gap-2 pt-2">
+          {BUDGETS.map((b) => {
+            const active = budget === b;
+            return (
+              <button
+                key={b}
+                type="button"
+                onClick={() => setBudget(active ? '' : b)}
+                className={`px-4 py-1.5 mono border transition-colors ${
+                  active
+                    ? 'bg-ink border-[var(--color-ink)] text-[var(--color-paper)]'
+                    : 'bg-transparent border-[var(--color-rule-strong)] ink-mute hover:ink hover:border-[var(--color-ink)]'
+                }`}
+              >
+                {b}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      {/* Timing pills */}
+      <fieldset className="field-line hairline-b">
+        <label>05 — timeline</label>
+        <input type="hidden" name="timing" value={timing} />
+        <div className="flex flex-wrap gap-2 pt-2">
+          {TIMING.map((t) => {
+            const active = timing === t;
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTiming(active ? '' : t)}
+                className={`px-4 py-1.5 mono border transition-colors ${
+                  active
+                    ? 'bg-signal border-[var(--color-ink)] ink'
+                    : 'bg-transparent border-[var(--color-rule-strong)] ink-mute hover:ink hover:border-[var(--color-ink)]'
+                }`}
+              >
+                {t}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <div className={`field-line ${invalid.message ? 'invalid' : ''}`}>
+        <label htmlFor="message">06 — about your project *</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          placeholder="What are you building? What is the moment that would make you call this a win?"
+          onChange={() => clearError('message')}
+        />
+      </div>
+
+      {/* honeypot */}
       <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
-      <button type="submit" className="btn btn-primary btn-arrow w-full" disabled={sending}>
-        {sending ? 'Sending…' : 'Send message'}
-      </button>
+      <div className="pt-10 flex flex-wrap items-baseline justify-between gap-6">
+        <button type="submit" className="btn btn-primary" disabled={sending}>
+          {sending ? 'Sending…' : 'Send brief'}
+        </button>
+        <span className="mono ink-mute">PGP available on request</span>
+      </div>
 
       {status.kind !== 'idle' && (
         <div
-          role="status"
-          className={`mt-4 p-4 rounded-lg text-sm border ${
+          role={status.kind === 'error' ? 'alert' : 'status'}
+          className={
             status.kind === 'success'
-              ? 'border-[var(--color-neon-cyan)] bg-[rgba(34,211,238,0.08)] text-[var(--color-neon-cyan)]'
-              : 'border-red-500 bg-red-500/10 text-red-300'
-          }`}
+              ? 'mt-8 p-5 border border-[var(--color-ink)] bg-signal ink text-base'
+              : 'mt-8 p-5 border text-base'
+          }
+          style={
+            status.kind === 'error'
+              ? {
+                  borderColor: 'var(--color-warn)',
+                  background: 'var(--color-warn-tint)',
+                  color: 'var(--color-warn)',
+                }
+              : undefined
+          }
         >
           {status.message}
         </div>
@@ -125,14 +175,8 @@ export default function ContactForm() {
   );
 }
 
-function FieldText({
-  name,
-  label,
-  type = 'text',
-  invalid = false,
-  required = false,
-  placeholder,
-  onValueChange,
+function Line({
+  name, label, type = 'text', invalid, required, placeholder, onValueChange,
 }: {
   name: string;
   label: string;
@@ -143,17 +187,16 @@ function FieldText({
   onValueChange?: () => void;
 }) {
   return (
-    <div className={`field ${invalid ? 'invalid' : ''}`}>
-      <label className="block text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-2">
-        {label}
-        {required && <span className="text-[var(--color-neon-cyan)]"> *</span>}
-      </label>
+    <div className={`field-line ${invalid ? 'invalid' : ''}`}>
+      <label htmlFor={name}>{label}{required ? ' *' : ''}</label>
       <input
+        id={name}
         type={type}
         name={name}
         required={required}
         placeholder={placeholder}
         onChange={onValueChange}
+        autoComplete={name === 'email' ? 'email' : name === 'name' ? 'name' : 'organization'}
       />
     </div>
   );

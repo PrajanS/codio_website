@@ -1,141 +1,258 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
 import Reveal from '../components/Reveal';
-import TiltCard from '../components/TiltCard';
-import { IconWeb, IconMobile, IconCloud, IconCheck } from '../components/Icon';
+import WordReveal from '../components/WordReveal';
+import MagneticButton from '../components/MagneticButton';
 
 export const metadata: Metadata = {
-  title: 'Services — Web, Mobile, Cloud',
-  description: 'Full-stack engineering services: web applications, native-quality mobile apps, and cloud infrastructure that scales.',
+  title: 'Services — Web, mobile, cloud, design',
+  description:
+    'Web platforms, mobile applications, cloud infrastructure and product design — delivered end to end by senior engineers.',
 };
 
 type Service = {
   id: string;
+  n: string;
   eyebrow: string;
   title: string;
-  icon: ReactNode;
+  italicWords?: number[];
+  signalWords?: number[];
   blurb: string;
+  stack: string[];
   features: string[];
-  reverse?: boolean;
 };
 
 const SERVICES: Service[] = [
   {
     id: 'web',
-    eyebrow: 'Web Development',
+    n: '01',
+    eyebrow: 'Web Platforms',
     title: 'Web platforms engineered for performance and growth.',
-    icon: <IconWeb size={88} strokeWidth={1.2} />,
-    blurb: 'From marketing sites to mission-critical SaaS dashboards, we build web platforms that load fast, rank well, and scale as your team grows. Next.js, React, TypeScript — used the way they were designed to be.',
+    italicWords: [3, 5],
+    signalWords: [5],
+    blurb:
+      'From marketing sites to mission-critical SaaS dashboards. We use Next.js, React and TypeScript the way they were designed to be used — server-rendered, accessible, and fast on every device people actually own.',
+    stack: ['Next.js 15', 'React 19', 'TypeScript', 'Postgres', 'Redis', 'Vercel · Fly · AWS'],
     features: [
-      'Next.js & React applications',
+      'Marketing & content sites',
+      'SaaS dashboards & admin tools',
       'Headless CMS (Sanity, Contentful)',
       'E-commerce (Shopify, Stripe)',
-      'SaaS dashboards & internal tools',
       'Core Web Vitals & SEO tuning',
       'Accessibility (WCAG 2.2 AA)',
     ],
   },
   {
     id: 'mobile',
-    eyebrow: 'Mobile App Development',
+    n: '02',
+    eyebrow: 'Mobile Applications',
     title: 'Native-quality mobile apps on iOS and Android in parallel.',
-    icon: <IconMobile size={88} strokeWidth={1.2} />,
-    blurb: 'One engineering team, two stores, one codebase. We use React Native and Flutter where they shine — and drop into Swift or Kotlin when native is the right call. Submission and review managed end-to-end.',
+    italicWords: [0, 1],
+    signalWords: [1],
+    blurb:
+      'One engineering team, two stores, one codebase. React Native or Flutter where they shine, native Swift / Kotlin when native is the right call. App Store and Play submission managed end to end.',
+    stack: ['React Native', 'Expo', 'Swift', 'Kotlin', 'Firebase', 'Sentry'],
     features: [
-      'React Native & Flutter',
-      'Native iOS (Swift) & Android (Kotlin)',
+      'Cross-platform applications',
+      'Native iOS & Android',
       'Offline-first architectures',
-      'Push notifications & deep linking',
-      'In-app purchases',
-      'App Store & Play submission',
+      'Push, deep-linking, IAP',
+      'CI for app distribution',
+      'Store submission & review',
     ],
-    reverse: true,
   },
   {
     id: 'cloud',
-    eyebrow: 'Cloud Solutions',
-    title: 'Cloud infrastructure built for reliability, observable by default.',
-    icon: <IconCloud size={88} strokeWidth={1.2} />,
-    blurb: "We design AWS, GCP, and Azure environments around your workload — not the other way around. Everything in code (Terraform, CDK), every deploy traceable, every spike alerted before users notice.",
+    n: '03',
+    eyebrow: 'Cloud & Infrastructure',
+    title: 'Infrastructure built for reliability, observable by default.',
+    italicWords: [2, 5],
+    signalWords: [5],
+    blurb:
+      'AWS, GCP and Azure environments designed around your workload — not the other way around. Everything in code (Terraform, CDK), every deploy traceable, every spike alerted before users notice.',
+    stack: ['Terraform', 'CDK', 'Kubernetes', 'AWS', 'GCP', 'Datadog · Grafana'],
     features: [
-      'Cloud migration & architecture',
-      'Infrastructure as Code (Terraform, CDK)',
-      'CI/CD pipelines (GitHub Actions)',
+      'Cloud migration & re-architecture',
+      'Infrastructure as Code',
+      'CI/CD pipelines',
       'Kubernetes & serverless',
-      'Observability (Datadog, Grafana)',
-      'Cost optimization audits',
+      'Observability stack',
+      'Cost optimisation audits',
     ],
   },
+  {
+    id: 'design',
+    n: '04',
+    eyebrow: 'Product Design',
+    title: 'Product design that ships with the code, not next quarter.',
+    italicWords: [0, 1],
+    signalWords: [1],
+    blurb:
+      'Discovery, UX, design systems and component libraries — built directly in Figma and React so engineering inherits, not interprets. We work alongside your team in the same Linear cycle.',
+    stack: ['Figma', 'Tokens Studio', 'Storybook', 'Radix', 'Tailwind v4', 'Motion'],
+    features: [
+      'Discovery & UX research',
+      'Design systems',
+      'UI engineering',
+      'Brand-into-product',
+      'Component libraries',
+      'Design ops & hand-off',
+    ],
+  },
+];
+
+const ENGAGEMENTS = [
+  { n: '01', name: 'Sprint', sub: 'Two weeks', body: 'Discovery, spike, working prototype. We hand over a written plan and a budget you can take to your board.' },
+  { n: '02', name: 'Build', sub: 'Six — twelve weeks', body: 'A bounded production build with weekly demos and Friday deploys. Fixed scope, fixed price.' },
+  { n: '03', name: 'Embed', sub: 'Three — twelve months', body: 'We embed senior engineers into your team for ongoing roadmap work. Day-rate, monthly cap.' },
 ];
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center">
-        <div className="container-x">
-          <Reveal>
-            <span className="eyebrow">Capabilities</span>
-            <h1 className="text-[clamp(2.6rem,2rem+2.8vw,4.4rem)] font-display font-bold leading-[1.1] tracking-tight mt-4 mb-4">
-              What we <span className="text-gradient">build for you.</span>
-            </h1>
-            <p className="text-lg text-[var(--color-text-muted)] max-w-[680px] mx-auto">
-              Three disciplines, deeply practiced. Each one runs end-to-end — discovery, design, build, deploy, and post-launch support.
-            </p>
-          </Reveal>
+      {/* ============ HERO ============ */}
+      <section className="frame pt-16 pb-20 max-md:pt-10 max-md:pb-12">
+        <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
+          <span className="mono ink-mute">[ 02 — services ]</span>
+          <span className="mono ink-faint">4 disciplines</span>
+        </div>
+
+        <WordReveal
+          as="h1"
+          className="font-display leading-[0.93] tracking-[-0.04em] text-[clamp(3rem,1.6rem+6vw,9rem)]"
+          italic={[3, 4]}
+          signal={[4]}
+        >
+          What we build for you.
+        </WordReveal>
+
+        <div className="grid grid-cols-12 gap-6 mt-10">
+          <div className="col-span-12 md:col-span-6 md:col-start-2">
+            <Reveal delay={240}>
+              <p className="text-lg ink-mute leading-relaxed">
+                Four disciplines, deeply practiced. Each one runs end-to-end — scope, shape, ship, sustain. Most engagements span two or three of them, and most start with a 30-minute call.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <div className="container-x">
-        {SERVICES.map((s) => (
-          <ServiceDetail key={s.id} service={s} />
+      {/* ============ SERVICES — long-form ============ */}
+      <section className="frame">
+        {SERVICES.map((s, i) => (
+          <ServiceBlock key={s.id} service={s} reverse={i % 2 === 1} />
         ))}
-      </div>
+      </section>
 
-      {/* CTA */}
-      <section className="py-24 max-md:py-16">
-        <div className="container-x">
-          <Reveal>
-            <div className="relative overflow-hidden p-16 max-md:p-10 text-center bg-gradient-soft border border-[var(--color-border-strong)] rounded-3xl">
-              <span className="eyebrow">No lock-in</span>
-              <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">Pick a discipline. Or all three.</h2>
-              <p className="max-w-[540px] mx-auto mb-8 text-[var(--color-text-muted)]">
-                Most of our engagements span multiple services — and most start with a 30-minute scoping call. No commitment, no slide deck.
-              </p>
-              <Link href="/contact" className="btn btn-primary btn-arrow">Book a scoping call</Link>
-            </div>
-          </Reveal>
+      {/* ============ ENGAGEMENT MODELS ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">How to hire us</span>
+            <span className="mono ink-faint">/ 02</span>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
+            Three engagement shapes
+          </div>
         </div>
+
+        <div className="grid grid-cols-12 gap-6">
+          {ENGAGEMENTS.map((e, i) => (
+            <Reveal key={e.n} className="col-span-12 md:col-span-4" delay={i * 80}>
+              <article className="hairline-b pb-10 h-full">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-display text-6xl leading-none ink-faint" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>{e.n}</span>
+                  <h3 className="font-display italic text-2xl leading-none signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>{e.name}</h3>
+                </div>
+                <div className="mono ink-mute mt-3 mb-5">{e.sub}</div>
+                <p className="text-base ink-mute leading-relaxed">{e.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ CTA ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <Reveal>
+          <div className="bg-ink p-12 md:p-20">
+            <div className="grid grid-cols-12 gap-6 items-end">
+              <div className="col-span-12 md:col-span-8">
+                <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 03 — start ]</span>
+                <h2 className="font-display mt-6 text-[clamp(2.4rem,1.4rem+3vw,5rem)] leading-[0.94] tracking-[-0.03em]" style={{ color: 'var(--color-paper)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                  Pick a discipline. <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>Or all four.</em>
+                </h2>
+                <p className="mt-6 max-w-[55ch]" style={{ color: 'var(--color-paper-mute)' }}>
+                  Most of our engagements span multiple disciplines. Almost all start with a 30-minute scoping call. No slide deck, no follow-up sequence.
+                </p>
+              </div>
+              <div className="col-span-12 md:col-span-4 md:text-right">
+                <MagneticButton href="/contact" className="btn btn-signal">
+                  Book a scoping call
+                </MagneticButton>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </>
   );
 }
 
-function ServiceDetail({ service: s }: { service: Service }) {
+function ServiceBlock({ service: s, reverse }: { service: Service; reverse: boolean }) {
   return (
-    <section id={s.id} className="py-16 scroll-mt-24">
-      <div className={`grid gap-12 items-center md:grid-cols-2 ${s.reverse ? '' : ''}`}>
-        <Reveal className={s.reverse ? 'md:order-2' : ''}>
-          <span className="eyebrow">{s.eyebrow}</span>
-          <h2 className="text-[clamp(1.8rem,1.4rem+1.6vw,2.6rem)] my-4">{s.title}</h2>
-          <p className="text-[var(--color-text-muted)] mb-6">{s.blurb}</p>
-          <ul className="grid grid-cols-2 gap-3 list-none p-0 mb-8 max-sm:grid-cols-1">
-            {s.features.map((f) => (
-              <li key={f} className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-                <IconCheck size={18} className="text-[#a5b4fc] shrink-0 mt-0.5" />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-          <Link href="/contact" className="btn btn-ghost btn-arrow">Discuss a project</Link>
-        </Reveal>
+    <article id={s.id} className="py-24 max-md:py-16 hairline-b scroll-mt-24">
+      <div className="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div className={`col-span-12 md:col-span-5 ${reverse ? 'md:col-start-8 md:order-2' : ''}`}>
+          <div className="sticky top-28">
+            <div className="flex items-baseline gap-4 mb-6">
+              <span className="font-display text-[5rem] leading-none ink-faint" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>{s.n}</span>
+              <span className="mono ink-mute">{s.eyebrow}</span>
+            </div>
+            <WordReveal
+              as="h2"
+              className="font-display leading-[0.96] tracking-[-0.03em] text-[clamp(2rem,1.2rem+2.5vw,4rem)]"
+              italic={s.italicWords}
+              signal={s.signalWords}
+            >
+              {s.title}
+            </WordReveal>
+          </div>
+        </div>
 
-        <Reveal>
-          <TiltCard className={`glass glass-border aspect-[4/3] grid place-items-center bg-gradient-soft rounded-2xl ${s.reverse ? 'md:order-1' : ''}`}>
-            <div className="text-[#a5b4fc] relative z-[1]">{s.icon}</div>
-          </TiltCard>
-        </Reveal>
+        <div className={`col-span-12 md:col-span-6 ${reverse ? 'md:col-start-1 md:order-1' : 'md:col-start-7'}`}>
+          <Reveal>
+            <p className="text-base ink-mute leading-relaxed mb-10">{s.blurb}</p>
+
+            <div className="hairline-b pb-5 mb-5 flex items-baseline justify-between">
+              <span className="mono ink-mute">Stack</span>
+              <span className="mono ink-faint">/ {s.stack.length.toString().padStart(2, '0')}</span>
+            </div>
+            <ul className="grid grid-cols-2 gap-y-2 gap-x-6 mb-12 list-none p-0">
+              {s.stack.map((t) => (
+                <li key={t} className="font-display text-xl tracking-tight" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                  {t}
+                </li>
+              ))}
+            </ul>
+
+            <div className="hairline-b pb-5 mb-5 flex items-baseline justify-between">
+              <span className="mono ink-mute">Capabilities</span>
+              <span className="mono ink-faint">/ {s.features.length.toString().padStart(2, '0')}</span>
+            </div>
+            <ul className="grid gap-3 list-none p-0 mb-10">
+              {s.features.map((f) => (
+                <li key={f} className="flex items-baseline gap-3 text-base ink">
+                  <span className="mono ink-faint mt-1">+</span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link href="/contact" className="btn">Discuss a project</Link>
+          </Reveal>
+        </div>
       </div>
-    </section>
+    </article>
   );
 }

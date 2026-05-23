@@ -1,247 +1,314 @@
 import Link from 'next/link';
 import Reveal from './components/Reveal';
-import StatCounter from './components/StatCounter';
-import Spotlight from './components/Spotlight';
+import WordReveal from './components/WordReveal';
 import MagneticButton from './components/MagneticButton';
-import TiltCard from './components/TiltCard';
 import LogoMarquee from './components/LogoMarquee';
-import { IconWeb, IconMobile, IconCloud, IconSparkle } from './components/Icon';
+import StatCounter from './components/StatCounter';
+import Marquee from './components/Marquee';
+import CaseStack, { type Case } from './components/CaseStack';
+
+const SELECTED: Case[] = [
+  { n: '01', title: 'Checkout 2.0', client: 'Northwind Retail', discipline: 'Web · E-commerce', year: '2026' },
+  { n: '02', title: 'Cloud Re-Platform', client: 'Lumen Health', discipline: 'Cloud · Healthcare', year: '2025' },
+  { n: '03', title: 'Companion App', client: 'Roam Travel', discipline: 'Mobile · Travel', year: '2025' },
+  { n: '04', title: 'Trade Desk Dashboard', client: 'Finch Analytics', discipline: 'Web · Fintech', year: '2024' },
+  { n: '05', title: 'Driver App', client: 'Atlas Logistics', discipline: 'Mobile · Logistics', year: '2024' },
+];
+
+const SERVICES = [
+  { n: '01', name: 'Web Platforms', sub: 'Next.js · React · TypeScript' },
+  { n: '02', name: 'Mobile Applications', sub: 'React Native · Swift · Kotlin' },
+  { n: '03', name: 'Cloud & Infra', sub: 'AWS · GCP · Terraform · K8s' },
+  { n: '04', name: 'Product Design', sub: 'Discovery · UX · Design Systems' },
+];
+
+const PROCESS = [
+  { n: '01', label: 'Scope', body: 'A 30-minute call. We turn a fuzzy ask into a one-page brief with budget and timeline before you sign anything.' },
+  { n: '02', label: 'Shape', body: 'Two weeks. Discovery, UX, technical spike. Output is a working prototype and a concrete plan.' },
+  { n: '03', label: 'Ship', body: 'Six to twelve weeks. Weekly demos, Linear access, real commits. We ship to production every Friday.' },
+  { n: '04', label: 'Sustain', body: 'Optional retainer. Observability, performance work, and roadmap pairing with your in-house team.' },
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <Spotlight>
-        <section className="relative min-h-[92vh] grid place-items-center pt-24 overflow-hidden">
-          <div className="hero-orb w-[420px] h-[420px] top-[8%] -left-[8%] bg-[var(--color-brand-1)]" />
-          <div className="hero-orb w-[460px] h-[460px] bottom-0 -right-[10%] bg-[var(--color-brand-3)]" style={{ animationDelay: '-4s' }} />
-          <div className="hero-orb w-[260px] h-[260px] top-[30%] right-[30%] bg-[var(--color-brand-2)] opacity-40" style={{ animationDelay: '-7s' }} />
-
-          <Reveal className="container-x text-center max-w-[940px] relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--color-border-strong)] bg-white/[0.03] backdrop-blur-md mb-6">
-              <span className="live-dot" />
-              <span className="text-xs tracking-[0.14em] uppercase text-[var(--color-text-muted)]">
-                Taking new projects · Q3
-              </span>
-            </div>
-
-            <h1 className="text-[clamp(2.8rem,2rem+4vw,5.6rem)] font-display font-bold leading-[1.05] tracking-tight my-4">
-              Engineering that <span className="text-gradient">moves business</span> forward.
-            </h1>
-            <p className="text-lg text-[var(--color-text-muted)] max-w-[640px] mx-auto">
-              iMax partners with ambitious teams to design, build, and scale high-performance digital products — from first prototype to global rollout.
-            </p>
-
-            <div className="mt-12 flex gap-3 justify-center flex-wrap">
-              <MagneticButton href="/contact" className="btn btn-primary btn-arrow">
-                Start a project
-              </MagneticButton>
-              <Link href="/services" className="btn btn-ghost">Explore services</Link>
-            </div>
-
-            <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-6 max-w-[760px] mx-auto">
-              <Stat target={120} suffix="+" label="Projects shipped" />
-              <Stat target={40} suffix="+" label="Industry partners" />
-              <Stat target={99.9} suffix="%" label="Uptime delivered" />
-              <Stat target={8} suffix="yrs" label="Building software" />
-            </div>
-          </Reveal>
-        </section>
-      </Spotlight>
-
-      {/* Trusted by */}
-      <section className="py-12">
-        <div className="container-x">
-          <Reveal>
-            <p className="text-center text-xs tracking-[0.2em] uppercase text-[var(--color-text-dim)] mb-8">
-              Trusted by teams at
-            </p>
-            <LogoMarquee />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="services" className="py-24 max-md:py-16">
-        <div className="container-x">
-          <Reveal className="text-center max-w-[720px] mx-auto mb-14">
-            <span className="eyebrow">What we do</span>
-            <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">
-              Three disciplines. One engineering team.
-            </h2>
-            <p className="text-[var(--color-text-muted)]">
-              We focus on the disciplines that compound — web, mobile, and cloud — so every layer of your product moves in step.
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-            <ServiceCard
-              icon={<IconWeb size={28} />}
-              title="Web Development"
-              blurb="Modern, performant web platforms built with React, Next.js, and battle-tested architectures that scale with traffic and team size."
-              bullets={['Marketing sites & SaaS dashboards', 'Headless CMS & e-commerce', 'Core Web Vitals tuned for SEO']}
-            />
-            <ServiceCard
-              icon={<IconMobile size={28} />}
-              title="Mobile Applications"
-              blurb="Native-quality iOS & Android apps via React Native and Flutter — one team, one codebase, two platforms shipped in parallel."
-              bullets={['Cross-platform apps', 'Real-time & offline-first', 'App Store & Play submission']}
-            />
-            <ServiceCard
-              icon={<IconCloud size={28} />}
-              title="Cloud Solutions"
-              blurb="AWS, GCP, and Azure infrastructure designed for reliability — infrastructure-as-code, CI/CD pipelines, and 24/7 observability."
-              bullets={['Cloud migration & architecture', 'DevOps & CI/CD', 'Cost optimization audits']}
-            />
+      {/* ============ HERO ============ */}
+      <section className="frame relative pt-16 pb-24 max-md:pt-10 max-md:pb-16">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-8 items-end">
+          <div className="col-span-12 flex items-baseline justify-between hairline-b pb-3">
+            <span className="mono ink-mute">[ 00 — index ]</span>
+            <span className="mono ink-mute hidden md:inline">2017 / ongoing</span>
+            <span className="mono ink-faint">EST. iMax Studio</span>
           </div>
 
-          <Reveal className="text-center mt-12">
-            <Link href="/services" className="btn btn-ghost btn-arrow">See all capabilities</Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Why iMax */}
-      <section className="py-24 max-md:py-16">
-        <div className="container-x grid gap-6 md:grid-cols-2 items-center">
-          <Reveal>
-            <span className="eyebrow">Why iMax</span>
-            <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">
-              A senior team that ships — not pitches.
-            </h2>
-            <p className="text-[var(--color-text-muted)] mb-6">
-              We're a tight team of engineers, designers, and product strategists. No layers, no handoffs — the person you talk to is the person building your product. That's how we keep timelines short and quality high.
-            </p>
-            <Link href="/about" className="btn btn-ghost btn-arrow">Our story</Link>
-          </Reveal>
-
-          <Reveal>
-            <TiltCard className="glass glass-border shimmer-border p-8 rounded-3xl">
-              <div className="grid grid-cols-2 gap-6 relative z-[1]">
-                <MiniStat title="Senior" body="Average 8+ years of engineering experience on every project." />
-                <MiniStat title="Fixed-scope" body="Transparent pricing, milestone-based delivery — no surprises." />
-                <MiniStat title="Open source" body="We contribute back to the tools we build on — and so will your team." />
-                <MiniStat title="Hand-off ready" body="Documented, tested, and easy to maintain after we ship." />
-              </div>
-            </TiltCard>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 max-md:py-16">
-        <div className="container-x">
-          <Reveal className="text-center max-w-[720px] mx-auto mb-14">
-            <span className="eyebrow">Social proof</span>
-            <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">Teams ship faster with iMax.</h2>
-          </Reveal>
-
-          <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-            <Testimonial
-              quote="iMax rebuilt our checkout flow in six weeks. Conversion is up 34% and our internal team didn't lose a single sprint. They feel like part of us."
-              name="Maria Chen"
-              role="Head of Product, Northwind Retail"
-              initial="M"
-            />
-            <Testimonial
-              quote="Our cloud bill dropped 41% the quarter after iMax came in. The audit alone paid for itself in the first month. Best technical hire we've made."
-              name="David Okafor"
-              role="CTO, Lumen Health"
-              initial="D"
-            />
-            <Testimonial
-              quote="They shipped both apps to the App Store and Play Store on the same day — and the code is the cleanest we've ever inherited. Bar is high now."
-              name="Aisha Patel"
-              role="Founder, Roam Travel"
-              initial="A"
-            />
+          <div className="col-span-12">
+            <WordReveal
+              as="h1"
+              className="font-display leading-[0.92] tracking-[-0.04em] text-[clamp(3.4rem,1rem+10vw,11.5rem)] mt-12"
+              italic={[4, 5, 6]}
+              signal={[4]}
+            >
+              We engineer software that earns its place.
+            </WordReveal>
           </div>
-        </div>
-      </section>
 
-      {/* CTA strip */}
-      <section className="py-24 max-md:py-16">
-        <div className="container-x">
-          <Reveal>
-            <Spotlight>
-              <div className="relative overflow-hidden p-16 max-md:p-10 text-center bg-gradient-soft border border-[var(--color-border-strong)] rounded-3xl">
-                <span className="eyebrow justify-center">
-                  <IconSparkle size={14} /> Ready when you are
-                </span>
-                <h2 className="text-[clamp(2rem,1.6rem+1.8vw,3rem)] my-4">Let's build the next thing.</h2>
-                <p className="max-w-[540px] mx-auto mb-8 text-[var(--color-text-muted)]">
-                  Tell us about your roadmap. We'll respond within one business day with a concrete next step — no sales loop.
-                </p>
-                <MagneticButton href="/contact" className="btn btn-primary btn-arrow">
+          <div className="col-span-12 md:col-span-5 md:col-start-2 mt-10">
+            <Reveal delay={300}>
+              <p className="text-lg md:text-xl ink-mute leading-relaxed mb-8">
+                iMax is a senior engineering studio working with founders and product teams on web platforms, mobile apps and cloud infrastructure that have to keep working after we leave.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <MagneticButton href="/contact" className="btn btn-primary">
                   Start a project
                 </MagneticButton>
+                <Link href="/portfolio" className="btn">Selected work</Link>
               </div>
-            </Spotlight>
-          </Reveal>
+            </Reveal>
+          </div>
+
+          <div className="col-span-12 md:col-span-4 md:col-start-9 mt-10">
+            <Reveal delay={500}>
+              <div className="flex items-baseline gap-3 mb-4">
+                <span className="live">Studio status</span>
+                <span className="mono ink-faint">— live</span>
+              </div>
+              <p className="text-base ink leading-relaxed">
+                Two slots open for <em className="italic signal">August 2026</em>. Most projects start with a 30-minute call. No deck, no follow-up sequence.
+              </p>
+              <div className="mt-8 hairline pt-5 mono ink-mute">
+                Avg. response 4h 12m · last reply 09:42 PT
+              </div>
+            </Reveal>
+          </div>
         </div>
+      </section>
+
+      {/* ============ KINETIC HEADLINE STRIP ============ */}
+      <section aria-hidden="true" className="py-6 border-y border-[var(--color-rule)] bg-paper-2">
+        <Marquee speed={68} className="marquee-display">
+          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+            Senior engineering
+          </span>
+          <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+            end&nbsp;to&nbsp;end
+          </span>
+          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12">
+            ·
+          </span>
+          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+            web · mobile · cloud
+          </span>
+          <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+            shipped&nbsp;fridays
+          </span>
+          <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12">
+            ·
+          </span>
+        </Marquee>
+      </section>
+
+      {/* ============ TRUSTED BY ============ */}
+      <section className="py-16 max-md:py-10">
+        <div className="frame">
+          <div className="flex items-baseline justify-between hairline-b pb-3 mb-10">
+            <span className="index">In rotation</span>
+            <span className="mono ink-faint">2024 — 2026</span>
+          </div>
+        </div>
+        <LogoMarquee />
+      </section>
+
+      {/* ============ SELECTED WORK ============ */}
+      <section className="frame py-24 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-2">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">Selected work</span>
+            <span className="mono ink-faint">/ 02</span>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:text-right">
+            <Link href="/portfolio" className="u-link mono ink">All projects ↗</Link>
+          </div>
+        </div>
+
+        <CaseStack cases={SELECTED} />
+
+        <div className="mt-10 flex items-baseline justify-between">
+          <span className="mono ink-mute">5 of 24 shown</span>
+          <Link href="/portfolio" className="btn">Open the archive</Link>
+        </div>
+      </section>
+
+      {/* ============ SERVICES SLAB ============ */}
+      <section className="frame py-24 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-2">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">What we do</span>
+            <span className="mono ink-faint">/ 03</span>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
+            Four disciplines, one team
+          </div>
+        </div>
+
+        <div>
+          {SERVICES.map((s) => (
+            <Link
+              key={s.n}
+              href={`/services#${s.name.split(' ')[0].toLowerCase()}`}
+              className="service-slab"
+            >
+              <span className="slab-idx ink-mute">{s.n}</span>
+              <span className="slab-title">{s.name}</span>
+              <span className="mono ink-mute justify-self-end">{s.sub}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ MANIFESTO + STATS ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-12">
+          <div className="col-span-12 md:col-span-6">
+            <span className="index">Manifesto</span>
+            <WordReveal
+              as="h2"
+              className="font-display leading-[0.96] tracking-[-0.03em] text-[clamp(2.4rem,1.6rem+2.6vw,4.6rem)] mt-6"
+              italic={[6, 7, 8, 9, 10, 11]}
+              signal={[8]}
+            >
+              We don&apos;t sell sprints. We sell things that survive their first quarter.
+            </WordReveal>
+          </div>
+
+          <div className="col-span-12 md:col-span-5 md:col-start-8">
+            <Reveal>
+              <p className="text-base ink-mute mb-6 leading-relaxed">
+                Most software fails not at launch but at month four — when the demo wears off and the actual scale arrives. We design for that month. Senior people on every project, no juniors learning on your timeline, no agency-of-agency relay.
+              </p>
+              <p className="text-base ink-mute leading-relaxed">
+                Every Friday you get a deploy and a one-page note. Every Monday we&apos;re in your standup. That&apos;s the whole rhythm.
+              </p>
+              <Link href="/about" className="btn btn-bare mt-8">Read the studio brief</Link>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Stats — solid ink, no gradients */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 mt-24 hairline pt-12">
+          <Stat n="01" value={<><StatCounter target={124} suffix="" /></>} label="Projects shipped" sub="2017 — 2026" />
+          <Stat n="02" value={<><StatCounter target={41} suffix="" /></>} label="Active partners" sub="across 6 industries" />
+          <Stat n="03" value={<><StatCounter target={99.9} suffix="%" decimals={1} /></>} label="Uptime delivered" sub="rolling 12 months" />
+          <Stat n="04" value={<><StatCounter target={11} suffix="d" /></>} label="Median kickoff" sub="brief → first commit" />
+        </div>
+      </section>
+
+      {/* ============ PROCESS ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">How we work</span>
+            <span className="mono ink-faint">/ 04</span>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
+            scope → shape → ship → sustain
+          </div>
+        </div>
+
+        <div className="grid grid-cols-12 gap-6">
+          {PROCESS.map((p, i) => (
+            <Reveal
+              key={p.n}
+              className={`col-span-12 md:col-span-6 ${i === 1 ? 'md:translate-y-12' : ''} ${i === 3 ? 'md:translate-y-12' : ''}`}
+              delay={i * 90}
+            >
+              <article className="hairline-b pb-10">
+                <div className="flex items-baseline gap-4 mb-5">
+                  <span className="font-display text-7xl tracking-tight leading-none ink-faint" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                    {p.n}
+                  </span>
+                  <h3 className="font-display italic text-3xl tracking-tight leading-none signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+                    {p.label}
+                  </h3>
+                </div>
+                <p className="text-base ink-mute leading-relaxed">{p.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ TESTIMONIAL CARD ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
+          <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
+            <span className="index">In their words</span>
+            <span className="mono ink-faint">/ 05</span>
+          </div>
+        </div>
+
+        <Reveal>
+          <blockquote className="grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-10 md:col-start-2">
+              <p className="font-display text-[clamp(1.8rem,1.2rem+2vw,3.4rem)] leading-[1.08] tracking-[-0.025em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&ldquo;</span>
+                iMax rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. They feel like part of us — the bar is permanently higher now.
+                <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&rdquo;</span>
+              </p>
+              <footer className="mt-8 hairline pt-5 flex flex-wrap items-baseline gap-3">
+                <cite className="not-italic font-display text-xl">Maria Chen</cite>
+                <span className="mono ink-mute">Head of Product · Northwind Retail</span>
+              </footer>
+            </div>
+          </blockquote>
+        </Reveal>
+      </section>
+
+      {/* ============ CTA — bold ink slab ============ */}
+      <section className="frame py-28 max-md:py-16">
+        <Reveal>
+          <div className="bg-ink p-12 md:p-20 relative overflow-hidden">
+            <div className="grid grid-cols-12 gap-6 items-end relative z-10">
+              <div className="col-span-12 md:col-span-8">
+                <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 06 — outro ]</span>
+                <h2 className="font-display mt-6 text-[clamp(2.6rem,1.4rem+4vw,6rem)] leading-[0.94] tracking-[-0.03em]" style={{ color: 'var(--color-paper)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
+                  Got something <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>worth building?</em>
+                </h2>
+              </div>
+              <div className="col-span-12 md:col-span-4 md:text-right">
+                <MagneticButton href="/contact" className="btn btn-signal">
+                  Start a project
+                </MagneticButton>
+                <p className="mono mt-6" style={{ color: 'var(--color-paper-faint)' }}>
+                  hello@imax.studio · reply &lt; 24h
+                </p>
+              </div>
+            </div>
+
+            {/* big watermark numeral */}
+            <span aria-hidden="true" className="font-display absolute -right-6 -bottom-12 text-[28rem] leading-none tracking-[-0.06em] opacity-10 select-none pointer-events-none"
+                  style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
+              ↗
+            </span>
+          </div>
+        </Reveal>
       </section>
     </>
   );
 }
 
-function Stat({ target, suffix, label }: { target: number; suffix: string; label: string }) {
-  return (
-    <div>
-      <div className="font-display font-bold leading-none text-[clamp(1.8rem,1.3rem+1.6vw,2.6rem)] text-gradient">
-        <StatCounter target={target} suffix={suffix} />
-      </div>
-      <div className="mt-2 text-xs tracking-[0.18em] uppercase text-[var(--color-text-dim)]">
-        {label}
-      </div>
-    </div>
-  );
-}
-
-function ServiceCard({ icon, title, blurb, bullets }: { icon: React.ReactNode; title: string; blurb: string; bullets: string[] }) {
+function Stat({ n, value, label, sub }: { n: string; value: React.ReactNode; label: string; sub: string }) {
   return (
     <Reveal>
-      <TiltCard className="glass glass-border p-8 h-full rounded-2xl transition-shadow duration-300 hover:shadow-[0_30px_60px_-20px_rgba(99,102,241,0.45)]">
-        <div className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-gradient-soft border border-[var(--color-border-strong)] mb-6 text-[#a5b4fc] relative z-[1]">
-          {icon}
+      <div className="flex flex-col gap-3">
+        <span className="mono ink-faint">{n}</span>
+        <span className="stat-num text-[clamp(3.2rem,2rem+4vw,6rem)] tabular-nums">
+          {value}
+        </span>
+        <div className="hairline pt-3">
+          <div className="font-display text-base tracking-tight">{label}</div>
+          <div className="mono ink-mute mt-1">{sub}</div>
         </div>
-        <h3 className="text-xl font-display font-bold mb-3 relative z-[1]">{title}</h3>
-        <p className="text-[var(--color-text-muted)] relative z-[1]">{blurb}</p>
-        <ul className="list-none p-0 mt-5 space-y-2 relative z-[1]">
-          {bullets.map((b) => (
-            <li key={b} className="relative pl-6 text-sm text-[var(--color-text-muted)]">
-              <span className="absolute left-0 top-[0.55em] w-2 h-2 rounded-full bg-gradient-brand" />
-              {b}
-            </li>
-          ))}
-        </ul>
-      </TiltCard>
-    </Reveal>
-  );
-}
-
-function MiniStat({ title, body }: { title: string; body: string }) {
-  return (
-    <div>
-      <div className="font-display font-bold text-3xl text-gradient">{title}</div>
-      <p className="text-sm mt-2 text-[var(--color-text-muted)]">{body}</p>
-    </div>
-  );
-}
-
-function Testimonial({ quote, name, role, initial }: { quote: string; name: string; role: string; initial: string }) {
-  return (
-    <Reveal>
-      <TiltCard max={4} className="glass glass-border p-8 h-full rounded-2xl">
-        <div className="font-display text-5xl leading-[0.6] text-gradient mb-4 relative z-[1]">“</div>
-        <blockquote className="text-[var(--color-text)] mb-6 leading-relaxed relative z-[1]">{quote}</blockquote>
-        <div className="flex items-center gap-3 relative z-[1]">
-          <div className="w-11 h-11 rounded-full grid place-items-center font-bold text-white bg-gradient-brand">{initial}</div>
-          <div>
-            <strong className="block text-sm">{name}</strong>
-            <span className="text-xs text-[var(--color-text-dim)]">{role}</span>
-          </div>
-        </div>
-      </TiltCard>
+      </div>
     </Reveal>
   );
 }

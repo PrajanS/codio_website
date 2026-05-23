@@ -8,28 +8,32 @@ type Props = {
   children: ReactNode;
   className?: string;
   strength?: number;
+  external?: boolean;
 };
 
-export default function MagneticButton({ href, children, className = '', strength = 14 }: Props) {
-  const ref = useRef<HTMLAnchorElement | null>(null);
+export default function MagneticButton({ href, children, className = '', strength = 18, external = false }: Props) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inner = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const wrap = ref.current;
+    const child = inner.current;
+    if (!wrap || !child) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     let raf = 0;
     const onMove = (e: PointerEvent) => {
-      const rect = el.getBoundingClientRect();
+      const rect = wrap.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
       const dist = Math.hypot(dx, dy);
-      const radius = Math.max(rect.width, rect.height) * 0.9;
+      const radius = Math.max(rect.width, rect.height) * 1.2;
       if (dist > radius) {
         if (raf) cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
-          el.style.transform = '';
+          wrap.style.transform = '';
+          child.style.transform = '';
         });
         return;
       }
@@ -38,25 +42,37 @@ export default function MagneticButton({ href, children, className = '', strengt
       const ty = (dy / radius) * strength * force;
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        el.style.transform = `translate(${tx}px, ${ty}px)`;
+        wrap.style.transform = `translate(${tx}px, ${ty}px)`;
+        child.style.transform = `translate(${tx * 0.4}px, ${ty * 0.4}px)`;
       });
     };
     const reset = () => {
       if (raf) cancelAnimationFrame(raf);
-      el.style.transform = '';
+      wrap.style.transform = '';
+      child.style.transform = '';
     };
     window.addEventListener('pointermove', onMove);
-    el.addEventListener('pointerleave', reset);
+    wrap.addEventListener('pointerleave', reset);
     return () => {
       window.removeEventListener('pointermove', onMove);
-      el.removeEventListener('pointerleave', reset);
+      wrap.removeEventListener('pointerleave', reset);
       if (raf) cancelAnimationFrame(raf);
     };
   }, [strength]);
 
+  const content = <span ref={inner} className="inline-flex items-center gap-2">{children}</span>;
+
   return (
-    <Link href={href} ref={ref} className={className} style={{ willChange: 'transform' }}>
-      {children}
-    </Link>
+    <div ref={ref} className="magnetic">
+      {external ? (
+        <a href={href} target="_blank" rel="noreferrer" className={className}>
+          {content}
+        </a>
+      ) : (
+        <Link href={href} className={className}>
+          {content}
+        </Link>
+      )}
+    </div>
   );
 }

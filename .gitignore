@@ -18,3 +18,8 @@ next-env.d.ts
 
 # typescript
 *.tsbuildinfo
+
+# graphify analysis output (regenerated per project)
+graphify-out
+.graphify_*
+.gx_*.py

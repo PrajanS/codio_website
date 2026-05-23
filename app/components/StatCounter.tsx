@@ -6,9 +6,10 @@ type Props = {
   target: number;
   suffix?: string;
   duration?: number;
+  decimals?: number;
 };
 
-export default function StatCounter({ target, suffix = '', duration = 1400 }: Props) {
+export default function StatCounter({ target, suffix = '', duration = 1600, decimals }: Props) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [value, setValue] = useState(0);
 
@@ -25,7 +26,7 @@ export default function StatCounter({ target, suffix = '', duration = 1400 }: Pr
           const start = performance.now();
           const tick = (now: number) => {
             const p = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
+            const eased = 1 - Math.pow(1 - p, 4);
             setValue(target * eased);
             if (p < 1) requestAnimationFrame(tick);
           };
@@ -33,13 +34,14 @@ export default function StatCounter({ target, suffix = '', duration = 1400 }: Pr
           io.unobserve(e.target);
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.45 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, [target, duration]);
 
-  const display = target % 1 === 0 ? Math.round(value).toString() : value.toFixed(1);
+  const d = decimals ?? (target % 1 === 0 ? 0 : 1);
+  const display = value.toFixed(d);
 
   return (
     <span ref={ref}>

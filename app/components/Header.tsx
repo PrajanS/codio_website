@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import MagneticButton from './MagneticButton';
 
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/portfolio', label: 'Work' },
-  { href: '/contact', label: 'Contact' },
+const LINKS = [
+  { href: '/', label: 'Index', n: '01' },
+  { href: '/services', label: 'Services', n: '02' },
+  { href: '/portfolio', label: 'Work', n: '03' },
+  { href: '/about', label: 'Studio', n: '04' },
+  { href: '/contact', label: 'Contact', n: '05' },
 ];
 
 export default function Header() {
@@ -18,7 +19,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -26,83 +27,102 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  // Close menu on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 py-4 transition-all duration-300 ${
+      className={`sticky top-0 z-40 transition-[background,backdrop-filter,border-color] duration-300 ${
         scrolled
-          ? 'bg-[rgba(6,8,20,0.7)] backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--color-border)]'
-          : 'border-b border-transparent'
+          ? 'bg-[color:var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-rule)]'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="container-x flex items-center justify-between gap-5">
-        <Link href="/" className="flex items-center gap-2 font-display font-bold text-[1.4rem] tracking-tight" aria-label="iMax home">
-          <span className="grid place-items-center w-9 h-9 rounded-[10px] bg-gradient-brand text-white font-extrabold shadow-[0_6px_20px_-6px_rgba(168,85,247,0.6)]">
-            i
-          </span>
-          <span>iMax</span>
+      <div className="frame flex items-center justify-between py-4">
+        <Link href="/" aria-label="iMax — home" className="group inline-flex items-baseline gap-1">
+          <span className="font-display italic text-2xl leading-none tracking-tight">imax</span>
+          <span className="signal text-xl leading-none">.</span>
+          <span className="mono ml-3 ink-mute hidden sm:inline">studio</span>
         </Link>
 
-        <ul
-          id="primary-nav"
-          className={`flex items-center gap-6 list-none p-0 max-md:fixed max-md:inset-x-0 max-md:top-[64px] max-md:bottom-0 max-md:flex-col max-md:justify-start max-md:items-stretch max-md:pt-12 max-md:px-6 max-md:gap-6 max-md:bg-[rgba(6,8,20,0.96)] max-md:backdrop-blur-xl max-md:transition-transform max-md:duration-300 ${
-            open ? 'max-md:translate-x-0' : 'max-md:translate-x-full'
-          }`}
-        >
-          {links.map((l) => {
-            const active = pathname === l.href;
-            return (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className={`nav-link text-sm font-medium transition-colors max-md:text-lg ${
-                    active ? 'is-active text-[var(--color-text)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <nav className="max-md:hidden">
+          <ul className="flex items-center gap-7 list-none p-0">
+            {LINKS.map((l) => {
+              const active = l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
+              return (
+                <li key={l.href} className="flex items-baseline gap-1.5">
+                  <span className="mono ink-faint">{l.n}</span>
+                  <Link href={l.href} className={`nav-link ${active ? 'is-active' : ''}`}>
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
-        <Link href="/contact" className="btn btn-primary btn-arrow max-md:hidden">
-          Start a project
-        </Link>
+        <div className="flex items-center gap-3 max-md:hidden">
+          <span className="live">Open · Q3 intake</span>
+          <MagneticButton href="/contact" className="btn btn-primary">
+            Start a project
+          </MagneticButton>
+        </div>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle navigation"
+          aria-label="Toggle menu"
           aria-expanded={open}
-          aria-controls="primary-nav"
-          className="hidden max-md:block relative w-11 h-11 rounded-xl border border-[var(--color-border-strong)] bg-white/5"
+          aria-controls="mobile-nav"
+          className="hidden max-md:inline-grid place-items-center w-11 h-11 border border-[var(--color-ink)]"
         >
           <span
-            className={`absolute left-3 right-3 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-300 ${
-              open ? 'top-[21px] translate-y-0 rotate-45' : 'top-[14px]'
-            }`}
+            className={`block w-5 h-px bg-[var(--color-ink)] transition-transform duration-300 ${open ? 'translate-y-[3px] rotate-45' : '-translate-y-1'}`}
           />
           <span
-            className={`absolute left-3 right-3 top-[21px] h-0.5 bg-[var(--color-text)] rounded transition-opacity ${
-              open ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <span
-            className={`absolute left-3 right-3 h-0.5 bg-[var(--color-text)] rounded transition-transform duration-300 ${
-              open ? 'top-[21px] translate-y-0 -rotate-45' : 'top-[28px]'
-            }`}
+            className={`block w-5 h-px bg-[var(--color-ink)] mt-1 transition-transform duration-300 ${open ? '-translate-y-[3px] -rotate-45' : 'translate-y-1'}`}
           />
         </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        id="mobile-nav"
+        className={`md:hidden fixed inset-0 top-[64px] bg-[var(--color-paper)] z-30 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        aria-hidden={!open}
+      >
+        <div className="frame pt-12 pb-16 h-full flex flex-col">
+          <ul className="list-none p-0 space-y-1 flex-1">
+            {LINKS.map((l) => {
+              const active = l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
+              return (
+                <li key={l.href} className="hairline-b">
+                  <Link
+                    href={l.href}
+                    className="flex items-baseline justify-between py-5 group"
+                  >
+                    <span className="mono ink-mute">{l.n}</span>
+                    <span
+                      className={`font-display text-4xl leading-none tracking-tight ${active ? 'italic signal' : 'ink'}`}
+                      style={{ fontVariationSettings: active ? '"opsz" 144, "SOFT" 100' : '"opsz" 144, "SOFT" 40' }}
+                    >
+                      {l.label}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="pt-8 mt-auto">
+            <span className="live mb-4 block">Open · Q3 intake</span>
+            <Link href="/contact" className="btn btn-primary w-full justify-center">Start a project</Link>
+          </div>
+        </div>
       </div>
     </header>
   );
