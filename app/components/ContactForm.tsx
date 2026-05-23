@@ -1,13 +1,9 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { processContactRequest } from '../contact/handler';
 
 type Status = { kind: 'idle' | 'success' | 'error'; message?: string };
-
-// Replace this with your Web3Forms access key from https://web3forms.com
-// (set NEXT_PUBLIC_WEB3FORMS_KEY in .env.local to override per-environment)
-const WEB3FORMS_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_ACCESS_KEY';
 
 const BUDGETS = ['Under $25k', '$25k — $80k', '$80k — $250k', '$250k +', 'Not sure yet'];
 const TIMING = ['ASAP', 'Next 30 days', '1 — 3 months', '3 — 6 months', '6 months +'];
@@ -55,19 +51,14 @@ export default function ContactForm() {
     setStatus({ kind: 'idle' });
     try {
       const data = new FormData(form);
-      data.append('access_key', WEB3FORMS_ACCESS_KEY);
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: data,
-      });
-      const json = await res.json();
-      if (json.success) {
-        setStatus({ kind: 'success', message: "Got it. We'll reply within one business day." });
+      const result = await processContactRequest(data);
+      if (result.success) {
+        setStatus({ kind: 'success', message: result.message });
         form.reset();
         setBudget('');
         setTiming('');
       } else {
-        throw new Error(json.message || 'Submission failed');
+        setStatus({ kind: 'error', message: result.message });
       }
     } catch {
       setStatus({
