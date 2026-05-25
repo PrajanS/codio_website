@@ -73,7 +73,7 @@ export default function Footer() {
         <div className="mt-24 pt-6 border-t border-[color:var(--color-paper)]/15 flex flex-wrap items-center justify-between gap-3 mono" style={{ color: 'var(--color-paper-faint)' }}>
           <span>© {new Date().getFullYear()} codio studio</span>
           <span>San Francisco · Remote-first</span>
-          <span>v.2026.05 — built in-house</span>
+          <span>v.2026.05 — founding cohort open</span>
         </div>
       </div>
     </footer>

@@ -102,9 +102,9 @@ const SERVICES: Service[] = [
 ];
 
 const ENGAGEMENTS = [
-  { n: '01', name: 'Sprint', sub: 'Two weeks', body: 'Discovery, spike, working prototype. We hand over a written plan and a budget you can take to your board.' },
-  { n: '02', name: 'Build', sub: 'Six — twelve weeks', body: 'A bounded production build with weekly demos and Friday deploys. Fixed scope, fixed price.' },
-  { n: '03', name: 'Embed', sub: 'Three — twelve months', body: 'We embed senior engineers into your team for ongoing roadmap work. Day-rate, monthly cap.' },
+  { n: '01', name: 'Sprint', sub: 'Two weeks · fixed price', body: "Discovery, spike, working prototype. We hand over a written plan and a budget you can take to your board. Good first step if you're not sure yet." },
+  { n: '02', name: 'Build', sub: 'Six — twelve weeks · fixed scope', body: 'A bounded production build with weekly demos and Friday deploys. Fixed scope, fixed price. Three of these are open as founding-cohort seats for 2026.' },
+  { n: '03', name: 'Embed', sub: 'Three — twelve months · day-rate', body: 'We embed founders into your team for ongoing roadmap work. Day-rate with a monthly cap, capped at one engagement at a time so attention stays whole.' },
 ];
 
 export default function ServicesPage() {
@@ -130,7 +130,7 @@ export default function ServicesPage() {
           <div className="col-span-12 md:col-span-6 md:col-start-2">
             <Reveal delay={240}>
               <p className="text-lg ink-mute leading-relaxed">
-                Four disciplines, deeply practiced. Each one runs end-to-end — scope, shape, ship, sustain. Most engagements span two or three of them, and most start with a 30-minute call.
+                Four disciplines, deeply practiced before Codio existed. Each one runs end-to-end — scope, shape, ship, sustain. Most engagements span two or three of them, and most start with a 30-minute call.
               </p>
             </Reveal>
           </div>

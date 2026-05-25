@@ -334,40 +334,46 @@ main section p:not(.mono):not([class*="text-xs"]):not([class*="text-sm"]) {
 }
 .word.in { opacity: 1; transform: none; }
 
-/* Custom cursor — solid ink, no blend modes (cleaner on light paper) */
+/* Custom cursor — signal-green dot, readable on both warm paper and deep ink slabs.
+   Ring outline gives a second layer of contrast on busy backgrounds. */
 .cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 999px;
-  background: var(--color-ink);
+  background: var(--color-signal-deep);
+  box-shadow: 0 0 0 1.5px var(--color-paper), 0 0 0 2.5px var(--color-ink);
   pointer-events: none;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: width 260ms var(--ease-out-expo),
               height 260ms var(--ease-out-expo),
               background 260ms var(--ease-out-expo),
+              box-shadow 260ms var(--ease-out-expo),
               border-radius 260ms var(--ease-out-expo);
 }
 .cursor.is-hover {
   width: 56px;
   height: 56px;
   background: var(--color-signal);
+  box-shadow: 0 0 0 1.5px var(--color-ink);
   mix-blend-mode: multiply;
 }
 .cursor.is-text {
   width: 2px;
   height: 28px;
   border-radius: 0;
-  background: var(--color-ink);
+  background: var(--color-signal-deep);
+  box-shadow: 0 0 0 1px var(--color-ink);
 }
 .cursor.is-drag {
   width: 86px;
   height: 86px;
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-signal);
+  color: var(--color-ink);
+  box-shadow: 0 0 0 1.5px var(--color-ink);
   font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.1em;

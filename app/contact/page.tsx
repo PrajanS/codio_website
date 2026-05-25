@@ -19,11 +19,15 @@ const LINES = [
 const FAQS = [
   {
     q: 'How fast can you start?',
-    a: 'Median kickoff is eleven days from first call. Two slots open for August 2026. Urgent fixes for existing partners always jump the queue.',
+    a: 'First call to first commit in under fourteen days, typically. We are opening a founding cohort of three engagements for 2026 — one is reserved, two are open right now.',
+  },
+  {
+    q: 'You have no portfolio yet — why should I take the risk?',
+    a: "Because the price reflects it. Founding-cohort engagements come with founder attention, fixed scope, and a discount that doesn't exist again. You get senior engineers who have shipped at scale elsewhere — just under a brand-new name.",
   },
   {
     q: 'What does an engagement cost?',
-    a: 'A Sprint is fixed at $18k for two weeks. A Build runs $80k — $260k depending on scope. An Embed is a day-rate with a monthly cap.',
+    a: 'A Sprint is fixed-price for two weeks. A Build runs as a fixed-scope, fixed-price six- to twelve-week engagement. An Embed is a day-rate with a monthly cap. Founding-cohort pricing is held below market — ask on the first call.',
   },
   {
     q: 'Do you sign NDAs?',
@@ -58,7 +62,7 @@ export default function ContactPage() {
           <div className="col-span-12 md:col-span-6 md:col-start-2">
             <Reveal delay={250}>
               <p className="text-lg ink-mute leading-relaxed">
-                One business day, no sales loop. Tell us where you are — first call, mid-build, or trying to rescue something. We&apos;ll come back with concrete next steps.
+                One business day, no sales loop. Tell us where you are — first call, mid-build, or trying to rescue something. We&apos;ll come back with concrete next steps, and if you&apos;re a fit for the founding cohort we&apos;ll say so.
               </p>
             </Reveal>
           </div>
@@ -94,7 +98,7 @@ export default function ContactPage() {
               </ul>
 
               <div className="mt-12 hairline pt-6 mono ink-mute leading-relaxed">
-                Form goes straight to a founder. Avg. reply 4h 12m during business hours.
+                Form goes straight to a founder. Reply within one business day, every time.
               </div>
             </Reveal>
           </aside>

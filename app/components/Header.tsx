@@ -65,9 +65,9 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3 max-md:hidden">
-          <span className="live">Open · Q3 intake</span>
+          <span className="live">Open · founding cohort</span>
           <MagneticButton href="/contact" className="btn btn-primary">
-            Start a project
+            Apply to the cohort
           </MagneticButton>
         </div>
 
@@ -120,8 +120,8 @@ export default function Header() {
           </ul>
 
           <div className="pt-8 mt-auto">
-            <span className="live mb-4 block">Open · Q3 intake</span>
-            <Link href="/contact" className="btn btn-primary w-full justify-center">Start a project</Link>
+            <span className="live mb-4 block">Open · founding cohort</span>
+            <Link href="/contact" className="btn btn-primary w-full justify-center">Apply to the cohort</Link>
           </div>
         </div>
       </div>

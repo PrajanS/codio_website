@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 const ITEMS = [
-  'Open · Q3 intake',
+  'Open · founding cohort · 3 slots',
   'Web · Mobile · Cloud · Design',
-  'SF · Berlin · Bengaluru — remote-first',
-  'Avg. project kickoff: 11 days',
-  '2026 — eight years building software',
+  'Remote-first · global engagements',
+  'First call → first commit · under 14 days',
+  '2026 — founding year',
 ];
 
 export default function Ticker() {

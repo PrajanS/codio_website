@@ -73,11 +73,11 @@ export default function ContactForm() {
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-1">
       <div className="grid grid-cols-2 gap-x-8 gap-y-1 max-sm:grid-cols-1">
-        <Line name="name" label="01 — your name" placeholder="Maria Chen" invalid={!!invalid.name} onValueChange={() => clearError('name')} required />
-        <Line name="email" type="email" label="02 — your email" placeholder="maria@northwind.com" invalid={!!invalid.email} onValueChange={() => clearError('email')} required />
+        <Line name="name" label="01 — your name" placeholder="Your full name" invalid={!!invalid.name} onValueChange={() => clearError('name')} required />
+        <Line name="email" type="email" label="02 — your email" placeholder="you@company.com" invalid={!!invalid.email} onValueChange={() => clearError('email')} required />
       </div>
 
-      <Line name="company" label="03 — company (optional)" placeholder="Northwind Retail" />
+      <Line name="company" label="03 — company (optional)" placeholder="Your company" />
 
       {/* Budget pills */}
       <fieldset className="field-line hairline-b">
