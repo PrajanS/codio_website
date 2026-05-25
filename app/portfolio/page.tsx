@@ -6,7 +6,7 @@ import PortfolioGrid from '../components/PortfolioGrid';
 
 export const metadata: Metadata = {
   title: 'Selected work — Archive 2024 — 2026',
-  description: 'A selection of recent iMax engagements across web, mobile and cloud.',
+  description: 'A selection of recent Codio engagements across web, mobile and cloud.',
 };
 
 export default function PortfolioPage() {

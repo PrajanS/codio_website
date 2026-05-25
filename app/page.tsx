@@ -38,7 +38,7 @@ export default function HomePage() {
           <div className="col-span-12 flex items-baseline justify-between hairline-b pb-3">
             <span className="mono ink-mute">[ 00 — index ]</span>
             <span className="mono ink-mute hidden md:inline">2017 / ongoing</span>
-            <span className="mono ink-faint">EST. iMax Studio</span>
+            <span className="mono ink-faint">EST. Codio Studio</span>
           </div>
 
           <div className="col-span-12">
@@ -55,7 +55,7 @@ export default function HomePage() {
           <div className="col-span-12 md:col-span-5 md:col-start-2 mt-10">
             <Reveal delay={300}>
               <p className="text-lg md:text-xl ink-mute leading-relaxed mb-8">
-                iMax is a senior engineering studio working with founders and product teams on web platforms, mobile apps and cloud infrastructure that have to keep working after we leave.
+                Codio is a senior engineering studio working with founders and product teams on web platforms, mobile apps and cloud infrastructure that have to keep working after we leave.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <MagneticButton href="/contact" className="btn btn-primary">
@@ -251,7 +251,7 @@ export default function HomePage() {
             <div className="col-span-12 md:col-span-10 md:col-start-2">
               <p className="font-display text-[clamp(1.8rem,1.2rem+2vw,3.4rem)] leading-[1.08] tracking-[-0.025em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
                 <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&ldquo;</span>
-                iMax rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. They feel like part of us — the bar is permanently higher now.
+                Codio rebuilt our checkout in six weeks and we lifted conversion thirty-four percent. They were senior, fast, and the code is the cleanest we have ever inherited. They feel like part of us — the bar is permanently higher now.
                 <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&rdquo;</span>
               </p>
               <footer className="mt-8 hairline pt-5 flex flex-wrap items-baseline gap-3">
@@ -279,7 +279,7 @@ export default function HomePage() {
                   Start a project
                 </MagneticButton>
                 <p className="mono mt-6" style={{ color: 'var(--color-paper-faint)' }}>
-                  hello@imax.studio · reply &lt; 24h
+                  hello@codio.studio · reply &lt; 24h
                 </p>
               </div>
             </div>

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MagneticButton from './MagneticButton';
+import BrandMark from './BrandMark';
+import Wordmark from './Wordmark';
 
 const LINKS = [
   { href: '/', label: 'Index', n: '01' },
@@ -41,10 +43,9 @@ export default function Header() {
       }`}
     >
       <div className="frame flex items-center justify-between py-4">
-        <Link href="/" aria-label="iMax — home" className="group inline-flex items-baseline gap-1">
-          <span className="font-display italic text-2xl leading-none tracking-tight">imax</span>
-          <span className="signal text-xl leading-none">.</span>
-          <span className="mono ml-3 ink-mute hidden sm:inline">studio</span>
+        <Link href="/" aria-label="Codio — home" className="group inline-flex items-center gap-2.5">
+          <BrandMark size={22} className="ink" />
+          <Wordmark size={1.5} studio />
         </Link>
 
         <nav className="max-md:hidden">

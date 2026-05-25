@@ -53,8 +53,8 @@ export default function Footer() {
               <em className="italic" style={{ color: 'var(--color-signal)' }}>We&apos;ll reply by tomorrow.</em>
             </h2>
             <div className="space-y-2">
-              <a href="mailto:hello@imax.studio" className="block font-display text-2xl u-link" style={{ color: 'var(--color-paper)' }}>
-                hello@imax.studio
+              <a href="mailto:hello@codio.studio" className="block font-display text-2xl u-link" style={{ color: 'var(--color-paper)' }}>
+                hello@codio.studio
               </a>
               <Link href="/contact" className="block mono u-link" style={{ color: 'var(--color-paper-mute)' }}>
                 Book a 30-min scoping call ↗
@@ -71,7 +71,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-24 pt-6 border-t border-[color:var(--color-paper)]/15 flex flex-wrap items-center justify-between gap-3 mono" style={{ color: 'var(--color-paper-faint)' }}>
-          <span>© {new Date().getFullYear()} imax studio</span>
+          <span>© {new Date().getFullYear()} codio studio</span>
           <span>San Francisco · Remote-first</span>
           <span>v.2026.05 — built in-house</span>
         </div>

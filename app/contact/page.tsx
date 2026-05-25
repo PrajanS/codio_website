@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const LINES = [
-  { icon: <IconMail size={16} />, label: 'Mail', value: 'hello@imax.studio', href: 'mailto:hello@imax.studio' },
+  { icon: <IconMail size={16} />, label: 'Mail', value: 'hello@codio.studio', href: 'mailto:hello@codio.studio' },
   { icon: <IconPin size={16} />, label: 'Studio', value: 'San Francisco · Remote-first' },
   { icon: <IconClock size={16} />, label: 'Hours', value: 'Mon — Fri · 09 — 18 PT' },
 ];

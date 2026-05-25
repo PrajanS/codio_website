@@ -28,17 +28,17 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://imax.dev'),
+  metadataBase: new URL('https://codio.studio'),
   title: {
-    default: 'iMax — Engineering studio for software, mobile & cloud',
-    template: '%s — iMax',
+    default: 'Codio — Engineering studio for software, mobile & cloud',
+    template: '%s — Codio',
   },
   description:
-    'iMax is a small senior engineering studio. We design, build and ship durable software for ambitious teams — web, mobile, cloud.',
+    'Codio is a small senior engineering studio. We design, build and ship durable software for ambitious teams — web, mobile, cloud.',
   keywords: ['software studio', 'web development', 'mobile apps', 'cloud engineering', 'product design'],
-  authors: [{ name: 'iMax' }],
+  authors: [{ name: 'Codio' }],
   openGraph: {
-    title: 'iMax — Engineering studio',
+    title: 'Codio — Engineering studio',
     description: 'Senior software engineering, end-to-end. Web, mobile, cloud.',
     type: 'website',
   },

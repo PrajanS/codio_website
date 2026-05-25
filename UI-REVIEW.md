@@ -1,4 +1,4 @@
-# iMax — UI Review
+# Codio — UI Review
 
 **Audited:** 2026-05-23
 **Baseline:** Abstract 6-pillar standards (no UI-SPEC.md; no GSD planning artifacts)
@@ -73,7 +73,7 @@
 **What's good:**
 - The voice is unusually disciplined. "We don't sell sprints. We sell things that survive their first quarter." (`app/page.tsx:179`). "Eight people. One inbox each. No middle layer." (`app/about/page.tsx:61`). "Outcomes, not outputs." (`app/portfolio/page.tsx:28`). No generic CTAs found by grep — no "Submit", "Click here", "Learn more". Buttons are imperatives that match the studio's claim: "Start a project", "Open the archive", "Book a scoping call", "Send brief".
 - Empty state is on-brand: `PortfolioGrid.tsx:188` — "No projects in this discipline yet — yours could be the first." Not a generic "No results."
-- Error state on the form is honest: `ContactForm.tsx:48` "Please fix the highlighted fields." and `:72` "Something went wrong. Please email hello@imax.studio directly." — second one gives the user an escape hatch.
+- Error state on the form is honest: `ContactForm.tsx:48` "Please fix the highlighted fields." and `:72` "Something went wrong. Please email hello@codio.studio directly." — second one gives the user an escape hatch.
 - FAQ answers are specific and quantified — `app/contact/page.tsx:23-37` cites "$18k for two weeks", "median kickoff is eleven days", "one-page mutual NDA". Not corporate hedging.
 - Ticker copy mixes status, geography, time — useful, not decorative (`Ticker.tsx:5-11`).
 

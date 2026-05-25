@@ -7,7 +7,7 @@ import StatCounter from '../components/StatCounter';
 export const metadata: Metadata = {
   title: 'Studio — Engineers, designers, strategists',
   description:
-    'iMax is an eight-person engineering studio. Senior, end-to-end, deliberately small.',
+    'Codio is an eight-person engineering studio. Senior, end-to-end, deliberately small.',
 };
 
 const VALUES = [
@@ -65,7 +65,7 @@ export default function AboutPage() {
           <div className="col-span-12 md:col-span-5 md:col-start-2">
             <Reveal delay={250}>
               <p className="text-lg ink-mute leading-relaxed">
-                iMax began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
+                Codio began as a two-person studio in San Francisco — a backend engineer and a designer tired of well-funded ideas dying in long discovery phases. Today we are eight, deliberately small, and still hands-on.
               </p>
             </Reveal>
           </div>

@@ -1,4 +1,4 @@
-# iMax — Engineering Studio
+# Codio — Engineering Studio
 
 A high-craft marketing site for a software & IT engineering studio. Built on **Next.js 15 (App Router)**, **React 19**, **TypeScript** and **Tailwind CSS v4**.
 
@@ -81,7 +81,7 @@ Accessibility:
 ## Project Structure
 
 ```
-iMax_website/
+codio_website/
 ├── app/
 │   ├── components/        # all interactive + layout components
 │   ├── about/             # /about

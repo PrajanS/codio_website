@@ -63,7 +63,7 @@ export default function ContactForm() {
     } catch {
       setStatus({
         kind: 'error',
-        message: 'Something went wrong. Please email hello@imax.studio directly.',
+        message: 'Something went wrong. Please email hello@codio.studio directly.',
       });
     } finally {
       setSending(false);
