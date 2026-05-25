@@ -40,7 +40,7 @@ export default async function OG() {
           }}
         >
           <span>[ codio studio · 2026 ]</span>
-          <span>est. 2017</span>
+          <span>est. 2026</span>
         </div>
 
         {/* Mark + wordmark */}
@@ -95,7 +95,7 @@ export default async function OG() {
           }}
         >
           <span>codio.studio</span>
-          <span>san francisco · remote-first</span>
+          <span>remote-first · india and worldwide</span>
         </div>
       </div>
     ),

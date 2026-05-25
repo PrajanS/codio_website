@@ -46,18 +46,18 @@ export default function Footer() {
           {/* Left: contact pitch */}
           <div className="md:col-span-5">
             <div className="mono ink-faint mb-4" style={{ color: 'var(--color-paper-faint)' }}>
-              [ 01 — start a project ]
+              [ 01 — get in touch ]
             </div>
             <h2 className="font-display text-[clamp(2.2rem,1.4rem+2vw,3.6rem)] leading-[0.95] tracking-tight mb-8" style={{ color: 'var(--color-paper)' }}>
               Tell us what you&apos;re building.<br />
-              <em className="italic" style={{ color: 'var(--color-signal)' }}>We&apos;ll reply by tomorrow.</em>
+              <em className="italic" style={{ color: 'var(--color-signal)' }}>We reply within one working day.</em>
             </h2>
             <div className="space-y-2">
               <a href="mailto:hello@codio.studio" className="block font-display text-2xl u-link" style={{ color: 'var(--color-paper)' }}>
                 hello@codio.studio
               </a>
               <Link href="/contact" className="block mono u-link" style={{ color: 'var(--color-paper-mute)' }}>
-                Book a 30-min scoping call ↗
+                Book a 30-minute call ↗
               </Link>
             </div>
           </div>
@@ -66,14 +66,14 @@ export default function Footer() {
           <div className="md:col-span-7 grid grid-cols-3 gap-6 max-sm:grid-cols-1">
             <FCol title="Services" items={SERVICES} />
             <FCol title="Studio" items={STUDIO} />
-            <FCol title="Elsewhere" items={NETWORK} external />
+            <FCol title="Find us" items={NETWORK} external />
           </div>
         </div>
 
         <div className="mt-24 pt-6 border-t border-[color:var(--color-paper)]/15 flex flex-wrap items-center justify-between gap-3 mono" style={{ color: 'var(--color-paper-faint)' }}>
           <span>© {new Date().getFullYear()} codio studio</span>
-          <span>San Francisco · Remote-first</span>
-          <span>v.2026.05 — founding cohort open</span>
+          <span>Remote-first · India and worldwide</span>
+          <span>v.2026.05 — first projects open</span>
         </div>
       </div>
     </footer>

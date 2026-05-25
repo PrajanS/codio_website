@@ -8,10 +8,10 @@ import BrandMark from './BrandMark';
 import Wordmark from './Wordmark';
 
 const LINKS = [
-  { href: '/', label: 'Index', n: '01' },
+  { href: '/', label: 'Home', n: '01' },
   { href: '/services', label: 'Services', n: '02' },
   { href: '/portfolio', label: 'Work', n: '03' },
-  { href: '/about', label: 'Studio', n: '04' },
+  { href: '/about', label: 'About', n: '04' },
   { href: '/contact', label: 'Contact', n: '05' },
 ];
 
@@ -65,9 +65,9 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3 max-md:hidden">
-          <span className="live">Open · founding cohort</span>
+          <span className="live">Open · 2 slots free</span>
           <MagneticButton href="/contact" className="btn btn-primary">
-            Apply to the cohort
+            Apply for a slot
           </MagneticButton>
         </div>
 
@@ -120,8 +120,8 @@ export default function Header() {
           </ul>
 
           <div className="pt-8 mt-auto">
-            <span className="live mb-4 block">Open · founding cohort</span>
-            <Link href="/contact" className="btn btn-primary w-full justify-center">Apply to the cohort</Link>
+            <span className="live mb-4 block">Open · 2 slots free</span>
+            <Link href="/contact" className="btn btn-primary w-full justify-center">Apply for a slot</Link>
           </div>
         </div>
       </div>

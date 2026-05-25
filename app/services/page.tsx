@@ -7,7 +7,7 @@ import MagneticButton from '../components/MagneticButton';
 export const metadata: Metadata = {
   title: 'Services — Web, mobile, cloud, design',
   description:
-    'Web platforms, mobile applications, cloud infrastructure and product design — delivered end to end by senior engineers.',
+    'We build web platforms, mobile apps, cloud systems, and product design — from start to finish, by senior engineers.',
 };
 
 type Service = {
@@ -27,18 +27,18 @@ const SERVICES: Service[] = [
     id: 'web',
     n: '01',
     eyebrow: 'Web Platforms',
-    title: 'Web platforms engineered for performance and growth.',
+    title: 'Web platforms built to be fast and grow with you.',
     italicWords: [3, 5],
     signalWords: [5],
     blurb:
-      'From marketing sites to mission-critical SaaS dashboards. We use Next.js, React and TypeScript the way they were designed to be used — server-rendered, accessible, and fast on every device people actually own.',
+      'From simple marketing sites to large business dashboards. We use Next.js, React, and TypeScript the way they were meant to be used — rendered on the server, accessible to everyone, and fast on the phones people actually own.',
     stack: ['Next.js 15', 'React 19', 'TypeScript', 'Postgres', 'Redis', 'Vercel · Fly · AWS'],
     features: [
-      'Marketing & content sites',
-      'SaaS dashboards & admin tools',
+      'Marketing and content sites',
+      'Business dashboards and admin tools',
       'Headless CMS (Sanity, Contentful)',
       'E-commerce (Shopify, Stripe)',
-      'Core Web Vitals & SEO tuning',
+      'Speed and SEO tuning',
       'Accessibility (WCAG 2.2 AA)',
     ],
   },
@@ -46,38 +46,38 @@ const SERVICES: Service[] = [
     id: 'mobile',
     n: '02',
     eyebrow: 'Mobile Applications',
-    title: 'Native-quality mobile apps on iOS and Android in parallel.',
+    title: 'Mobile apps for iOS and Android, built together.',
     italicWords: [0, 1],
     signalWords: [1],
     blurb:
-      'One engineering team, two stores, one codebase. React Native or Flutter where they shine, native Swift / Kotlin when native is the right call. App Store and Play submission managed end to end.',
+      'One team, two app stores, one code base. We use React Native or Flutter when they are the right fit, and Swift or Kotlin when we need full native power. App Store and Play Store submission is handled by us, from start to finish.',
     stack: ['React Native', 'Expo', 'Swift', 'Kotlin', 'Firebase', 'Sentry'],
     features: [
-      'Cross-platform applications',
-      'Native iOS & Android',
-      'Offline-first architectures',
-      'Push, deep-linking, IAP',
-      'CI for app distribution',
-      'Store submission & review',
+      'Cross-platform apps',
+      'Native iOS and Android',
+      'Offline-first apps',
+      'Push, deep linking, in-app purchases',
+      'Build pipelines for release',
+      'App store submission and review',
     ],
   },
   {
     id: 'cloud',
     n: '03',
     eyebrow: 'Cloud & Infrastructure',
-    title: 'Infrastructure built for reliability, observable by default.',
+    title: 'Cloud infrastructure that is reliable and easy to watch.',
     italicWords: [2, 5],
     signalWords: [5],
     blurb:
-      'AWS, GCP and Azure environments designed around your workload — not the other way around. Everything in code (Terraform, CDK), every deploy traceable, every spike alerted before users notice.',
+      'AWS, GCP, and Azure setups built around your workload — not the other way round. Everything is written as code (Terraform, CDK), every release is traceable, and every problem is alerted before users notice.',
     stack: ['Terraform', 'CDK', 'Kubernetes', 'AWS', 'GCP', 'Datadog · Grafana'],
     features: [
-      'Cloud migration & re-architecture',
-      'Infrastructure as Code',
+      'Cloud migration and redesign',
+      'Infrastructure as code',
       'CI/CD pipelines',
-      'Kubernetes & serverless',
-      'Observability stack',
-      'Cost optimisation audits',
+      'Kubernetes and serverless',
+      'Monitoring and alerting',
+      'Cost reviews',
     ],
   },
   {
@@ -88,23 +88,38 @@ const SERVICES: Service[] = [
     italicWords: [0, 1],
     signalWords: [1],
     blurb:
-      'Discovery, UX, design systems and component libraries — built directly in Figma and React so engineering inherits, not interprets. We work alongside your team in the same Linear cycle.',
+      'Research, UX, design systems, and component libraries — built directly in Figma and React, so the engineering team can use the design instead of guessing what it meant. We work alongside your team in the same weekly cycle.',
     stack: ['Figma', 'Tokens Studio', 'Storybook', 'Radix', 'Tailwind v4', 'Motion'],
     features: [
-      'Discovery & UX research',
+      'Research and UX',
       'Design systems',
       'UI engineering',
-      'Brand-into-product',
+      'Brand into product',
       'Component libraries',
-      'Design ops & hand-off',
+      'Design hand-off',
     ],
   },
 ];
 
 const ENGAGEMENTS = [
-  { n: '01', name: 'Sprint', sub: 'Two weeks · fixed price', body: "Discovery, spike, working prototype. We hand over a written plan and a budget you can take to your board. Good first step if you're not sure yet." },
-  { n: '02', name: 'Build', sub: 'Six — twelve weeks · fixed scope', body: 'A bounded production build with weekly demos and Friday deploys. Fixed scope, fixed price. Three of these are open as founding-cohort seats for 2026.' },
-  { n: '03', name: 'Embed', sub: 'Three — twelve months · day-rate', body: 'We embed founders into your team for ongoing roadmap work. Day-rate with a monthly cap, capped at one engagement at a time so attention stays whole.' },
+  {
+    n: '01',
+    name: 'Sprint',
+    sub: 'Two weeks · fixed price',
+    body: "Research, a quick test build, and a working prototype. You get a written plan and a budget you can show your board. A good first step if you are not sure where to start.",
+  },
+  {
+    n: '02',
+    name: 'Build',
+    sub: 'Six to twelve weeks · fixed scope',
+    body: 'A full production build with weekly demos and Friday releases. Fixed scope and fixed price. Three of these are open as our first project slots for 2026.',
+  },
+  {
+    n: '03',
+    name: 'Embed',
+    sub: 'Three to twelve months · day rate',
+    body: 'We join your team as senior engineers for ongoing work. Day rate with a monthly limit. We only take one embed at a time so attention stays focused.',
+  },
 ];
 
 export default function ServicesPage() {
@@ -114,7 +129,7 @@ export default function ServicesPage() {
       <section className="frame pt-16 pb-20 max-md:pt-10 max-md:pb-12">
         <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
           <span className="mono ink-mute">[ 02 — services ]</span>
-          <span className="mono ink-faint">4 disciplines</span>
+          <span className="mono ink-faint">4 areas</span>
         </div>
 
         <WordReveal
@@ -130,7 +145,7 @@ export default function ServicesPage() {
           <div className="col-span-12 md:col-span-6 md:col-start-2">
             <Reveal delay={240}>
               <p className="text-lg ink-mute leading-relaxed">
-                Four disciplines, deeply practiced before Codio existed. Each one runs end-to-end — scope, shape, ship, sustain. Most engagements span two or three of them, and most start with a 30-minute call.
+                Four areas, all built by the founders before Codio existed. Each one runs from start to finish — plan, design, build, support. Most projects use two or three of them, and every project starts with a 30-minute call.
               </p>
             </Reveal>
           </div>
@@ -152,7 +167,7 @@ export default function ServicesPage() {
             <span className="mono ink-faint">/ 02</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            Three engagement shapes
+            Three ways to work together
           </div>
         </div>
 
@@ -180,15 +195,15 @@ export default function ServicesPage() {
               <div className="col-span-12 md:col-span-8">
                 <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 03 — start ]</span>
                 <h2 className="font-display mt-6 text-[clamp(2.4rem,1.4rem+3vw,5rem)] leading-[0.94] tracking-[-0.03em]" style={{ color: 'var(--color-paper)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                  Pick a discipline. <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>Or all four.</em>
+                  Pick one area. <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>Or all four.</em>
                 </h2>
                 <p className="mt-6 max-w-[55ch]" style={{ color: 'var(--color-paper-mute)' }}>
-                  Most of our engagements span multiple disciplines. Almost all start with a 30-minute scoping call. No slide deck, no follow-up sequence.
+                  Most of our projects cover two or three of these areas. Every one starts with a 30-minute call. No slide deck, no sales follow-ups.
                 </p>
               </div>
               <div className="col-span-12 md:col-span-4 md:text-right">
                 <MagneticButton href="/contact" className="btn btn-signal">
-                  Book a scoping call
+                  Book a call
                 </MagneticButton>
               </div>
             </div>
@@ -225,7 +240,7 @@ function ServiceBlock({ service: s, reverse }: { service: Service; reverse: bool
             <p className="text-base ink-mute leading-relaxed mb-10">{s.blurb}</p>
 
             <div className="hairline-b pb-5 mb-5 flex items-baseline justify-between">
-              <span className="mono ink-mute">Stack</span>
+              <span className="mono ink-mute">Tools we use</span>
               <span className="mono ink-faint">/ {s.stack.length.toString().padStart(2, '0')}</span>
             </div>
             <ul className="grid grid-cols-2 gap-y-2 gap-x-6 mb-12 list-none p-0">
@@ -237,7 +252,7 @@ function ServiceBlock({ service: s, reverse }: { service: Service; reverse: bool
             </ul>
 
             <div className="hairline-b pb-5 mb-5 flex items-baseline justify-between">
-              <span className="mono ink-mute">Capabilities</span>
+              <span className="mono ink-mute">What we do</span>
               <span className="mono ink-faint">/ {s.features.length.toString().padStart(2, '0')}</span>
             </div>
             <ul className="grid gap-3 list-none p-0 mb-10">
@@ -249,7 +264,7 @@ function ServiceBlock({ service: s, reverse }: { service: Service; reverse: bool
               ))}
             </ul>
 
-            <Link href="/contact" className="btn">Discuss a project</Link>
+            <Link href="/contact" className="btn">Talk about a project</Link>
           </Reveal>
         </div>
       </div>

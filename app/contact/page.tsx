@@ -7,35 +7,35 @@ import { IconMail, IconPin, IconClock } from '../components/Icon';
 export const metadata: Metadata = {
   title: 'Contact — Start a project',
   description:
-    "Tell us about your project. One business day, no sales loop. We'll come back with concrete next steps.",
+    "Tell us about your project. We reply in one working day. No long sales process. After the first call, you get a one-page plan.",
 };
 
 const LINES = [
-  { icon: <IconMail size={16} />, label: 'Mail', value: 'hello@codio.studio', href: 'mailto:hello@codio.studio' },
-  { icon: <IconPin size={16} />, label: 'Studio', value: 'San Francisco · Remote-first' },
-  { icon: <IconClock size={16} />, label: 'Hours', value: 'Mon — Fri · 09 — 18 PT' },
+  { icon: <IconMail size={16} />, label: 'Email', value: 'hello@codio.studio', href: 'mailto:hello@codio.studio' },
+  { icon: <IconPin size={16} />, label: 'Location', value: 'Remote-first · global' },
+  { icon: <IconClock size={16} />, label: 'Hours', value: 'Mon — Fri · 09 — 18 IST' },
 ];
 
 const FAQS = [
   {
     q: 'How fast can you start?',
-    a: 'First call to first commit in under fourteen days, typically. We are opening a founding cohort of three engagements for 2026 — one is reserved, two are open right now.',
+    a: 'Usually less than fourteen days from first call to first commit. We have three project slots for 2026 — one is taken, two are still open.',
   },
   {
-    q: 'You have no portfolio yet — why should I take the risk?',
-    a: "Because the price reflects it. Founding-cohort engagements come with founder attention, fixed scope, and a discount that doesn't exist again. You get senior engineers who have shipped at scale elsewhere — just under a brand-new name.",
+    q: 'You have no past projects to show. Why should I trust you?',
+    a: "Because the price is honest about that. Our first three projects come with full founder attention, fixed scope, and a special price that will not be offered again. The founders have shipped software at scale before — just under a new studio name.",
   },
   {
-    q: 'What does an engagement cost?',
-    a: 'A Sprint is fixed-price for two weeks. A Build runs as a fixed-scope, fixed-price six- to twelve-week engagement. An Embed is a day-rate with a monthly cap. Founding-cohort pricing is held below market — ask on the first call.',
+    q: 'How much does a project cost?',
+    a: 'A Sprint is fixed-price for two weeks. A Build is a fixed-scope, fixed-price project of six to twelve weeks. An Embed is a day rate with a monthly limit. First-project pricing is below market — we share exact numbers on the first call.',
   },
   {
     q: 'Do you sign NDAs?',
-    a: 'Yes — happy to sign yours, or we have a one-page mutual NDA we can send in two minutes.',
+    a: 'Yes. We are happy to sign yours, or we can send you a simple one-page mutual NDA in two minutes.',
   },
   {
-    q: 'Will my code be readable after you leave?',
-    a: 'That is the point. Every project ends with an architecture brief, a README that actually documents the system, and a one-hour walk-through with your team.',
+    q: 'Will my code be easy to read after you leave?',
+    a: 'Yes. Every project ends with a written guide to the system, a clear README, and a one-hour walk-through with your team.',
   },
 ];
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
       <section className="frame pt-16 pb-16 max-md:pt-10 max-md:pb-10">
         <div className="flex items-baseline justify-between hairline-b pb-3 mb-12">
           <span className="mono ink-mute">[ 05 — contact ]</span>
-          <span className="live">Open · reply &lt; 24h</span>
+          <span className="live">Open · reply within 24h</span>
         </div>
 
         <WordReveal
@@ -62,7 +62,7 @@ export default function ContactPage() {
           <div className="col-span-12 md:col-span-6 md:col-start-2">
             <Reveal delay={250}>
               <p className="text-lg ink-mute leading-relaxed">
-                One business day, no sales loop. Tell us where you are — first call, mid-build, or trying to rescue something. We&apos;ll come back with concrete next steps, and if you&apos;re a fit for the founding cohort we&apos;ll say so.
+                One working day. No long sales process. Tell us where you are — only an idea, halfway through a build, or trying to save a project that is in trouble. We will write back with clear next steps, and if your project fits our first three slots, we will say so.
               </p>
             </Reveal>
           </div>
@@ -76,7 +76,7 @@ export default function ContactPage() {
           <aside className="col-span-12 md:col-span-4">
             <Reveal>
               <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
-                <span className="index">Direct lines</span>
+                <span className="index">How to reach us</span>
               </div>
 
               <ul className="list-none p-0 space-y-6">
@@ -98,7 +98,7 @@ export default function ContactPage() {
               </ul>
 
               <div className="mt-12 hairline pt-6 mono ink-mute leading-relaxed">
-                Form goes straight to a founder. Reply within one business day, every time.
+                Your message goes straight to a founder. We reply within one working day, every time.
               </div>
             </Reveal>
           </aside>
@@ -107,7 +107,7 @@ export default function ContactPage() {
           <div className="col-span-12 md:col-span-7 md:col-start-6">
             <Reveal>
               <div className="flex items-baseline gap-4 hairline-b pb-3 mb-8">
-                <span className="index">Project brief</span>
+                <span className="index">Project details</span>
                 <span className="mono ink-faint">— 4 fields</span>
               </div>
               <ContactForm />
@@ -120,7 +120,7 @@ export default function ContactPage() {
       <section className="frame py-28 max-md:py-16">
         <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
           <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">Frequently asked</span>
+            <span className="index">Common questions</span>
             <span className="mono ink-faint">/ 02</span>
           </div>
         </div>

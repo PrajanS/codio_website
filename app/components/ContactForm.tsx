@@ -5,8 +5,8 @@ import { processContactRequest } from '../contact/handler';
 
 type Status = { kind: 'idle' | 'success' | 'error'; message?: string };
 
-const BUDGETS = ['Under $25k', '$25k — $80k', '$80k — $250k', '$250k +', 'Not sure yet'];
-const TIMING = ['ASAP', 'Next 30 days', '1 — 3 months', '3 — 6 months', '6 months +'];
+const BUDGETS = ['Under ₹20L', '₹20L — ₹60L', '₹60L — ₹2Cr', '₹2Cr +', 'Not sure yet'];
+const TIMING = ['As soon as possible', 'Within 30 days', '1 — 3 months', '3 — 6 months', '6 months or later'];
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
@@ -135,7 +135,7 @@ export default function ContactForm() {
           id="message"
           name="message"
           required
-          placeholder="What are you building? What is the moment that would make you call this a win?"
+          placeholder="What are you building? What would make this project a success for you?"
           onChange={() => clearError('message')}
         />
       </div>
@@ -145,9 +145,9 @@ export default function ContactForm() {
 
       <div className="pt-10 flex flex-wrap items-baseline justify-between gap-6">
         <button type="submit" className="btn btn-primary" disabled={sending}>
-          {sending ? 'Sending…' : 'Send brief'}
+          {sending ? 'Sending…' : 'Send message'}
         </button>
-        <span className="mono ink-mute">PGP available on request</span>
+        <span className="mono ink-mute">We reply within one working day</span>
       </div>
 
       {status.kind !== 'idle' && (

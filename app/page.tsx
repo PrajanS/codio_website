@@ -13,16 +13,16 @@ const SERVICES = [
 ];
 
 const PROCESS = [
-  { n: '01', label: 'Scope', body: 'A 30-minute call. We turn a fuzzy ask into a one-page brief with budget and timeline before you sign anything.' },
-  { n: '02', label: 'Shape', body: 'Two weeks. Discovery, UX, technical spike. Output is a working prototype and a concrete plan.' },
-  { n: '03', label: 'Ship', body: 'Six to twelve weeks. Weekly demos, Linear access, real commits. We ship to production every Friday.' },
-  { n: '04', label: 'Sustain', body: 'Optional retainer. Observability, performance work, and roadmap pairing with your in-house team.' },
+  { n: '01', label: 'Plan', body: 'A 30-minute call. We turn your idea into a one-page plan with a clear budget and timeline before you sign anything.' },
+  { n: '02', label: 'Design', body: 'Two weeks. Research, screens, and a small working prototype. You get a real plan, not a slide deck.' },
+  { n: '03', label: 'Build', body: 'Six to twelve weeks. Weekly demos, full access to our tools, and real commits. We release to production every Friday.' },
+  { n: '04', label: 'Support', body: 'Optional monthly retainer. We help with monitoring, performance, and planning the next set of features with your team.' },
 ];
 
 const COHORT = [
-  { n: '01', label: 'Reserved', body: 'First seat is held — kickoff scheduled for July.' },
-  { n: '02', label: 'Open', body: 'Looking for a web or mobile build with a real team behind it.' },
-  { n: '03', label: 'Open', body: 'Looking for a cloud or infra engagement we can take end to end.' },
+  { n: '01', label: 'Reserved', body: 'First seat is taken. The project starts in July.' },
+  { n: '02', label: 'Open', body: 'Looking for a web or mobile build with a team that wants senior help from day one.' },
+  { n: '03', label: 'Open', body: 'Looking for a cloud or infrastructure project we can own from start to finish.' },
 ];
 
 export default function HomePage() {
@@ -41,23 +41,23 @@ export default function HomePage() {
             <WordReveal
               as="h1"
               className="font-display leading-[0.92] tracking-[-0.04em] text-[clamp(3.4rem,1rem+10vw,11.5rem)] mt-12"
-              italic={[4, 5, 6]}
+              italic={[3, 4, 5]}
               signal={[4]}
             >
-              We engineer software that earns its place.
+              We build software that keeps working.
             </WordReveal>
           </div>
 
           <div className="col-span-12 md:col-span-5 md:col-start-2 mt-10">
             <Reveal delay={300}>
               <p className="text-lg md:text-xl ink-mute leading-relaxed mb-8">
-                Codio is a brand-new senior engineering studio. We&apos;re opening a founding cohort of three engagements — web, mobile, and cloud — picked carefully so we can stake our reputation on each one.
+                Codio is a new software studio. We are senior engineers and designers starting fresh. For our first year, we are taking on only three projects so each one gets our full attention.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <MagneticButton href="/contact" className="btn btn-primary">
-                  Apply to the cohort
+                  Apply for a slot
                 </MagneticButton>
-                <Link href="/services" className="btn">What we build</Link>
+                <Link href="/services" className="btn">See what we build</Link>
               </div>
             </Reveal>
           </div>
@@ -69,10 +69,10 @@ export default function HomePage() {
                 <span className="mono ink-faint">— live</span>
               </div>
               <p className="text-base ink leading-relaxed">
-                <em className="italic signal">Three founding-cohort slots.</em> One reserved, two open. We&apos;ll write a one-page plan after the first call — no deck, no follow-up sequence.
+                <em className="italic signal">Three project slots for 2026.</em> One is taken, two are open. After the first call, we send a short one-page plan. No long sales process.
               </p>
               <div className="mt-8 hairline pt-5 mono ink-mute">
-                Every brief reviewed by a founder · reply within one business day
+                Every message is read by a founder · we reply within one working day
               </div>
             </Reveal>
           </div>
@@ -83,7 +83,7 @@ export default function HomePage() {
       <section aria-hidden="true" className="py-6 border-y border-[var(--color-rule)] bg-paper-2">
         <Marquee speed={68} className="marquee-display">
           <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-            Senior engineering
+            Senior engineers
           </span>
           <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
             end&nbsp;to&nbsp;end
@@ -95,7 +95,7 @@ export default function HomePage() {
             web · mobile · cloud
           </span>
           <span className="font-display italic text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12 signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>
-            shipped&nbsp;fridays
+            released&nbsp;every&nbsp;friday
           </span>
           <span className="font-display text-[clamp(3rem,8vw,8rem)] leading-none tracking-[-0.04em] mr-12">
             ·
@@ -107,22 +107,22 @@ export default function HomePage() {
       <section className="py-16 max-md:py-10">
         <div className="frame">
           <div className="flex items-baseline justify-between hairline-b pb-3 mb-10">
-            <span className="index">Tools we ship with</span>
+            <span className="index">Tools we use</span>
             <span className="mono ink-faint">stack / 12</span>
           </div>
         </div>
         <LogoMarquee />
       </section>
 
-      {/* ============ FOUNDING COHORT ============ */}
+      {/* ============ FIRST PROJECTS ============ */}
       <section className="frame py-24 max-md:py-16">
         <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
           <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">Founding cohort</span>
+            <span className="index">First projects</span>
             <span className="mono ink-faint">/ 02</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            Three engagements · 2026
+            Three slots · 2026
           </div>
         </div>
 
@@ -149,8 +149,8 @@ export default function HomePage() {
         </div>
 
         <div className="mt-10 flex items-baseline justify-between">
-          <span className="mono ink-mute">1 reserved · 2 open</span>
-          <Link href="/contact" className="btn">Apply to the cohort</Link>
+          <span className="mono ink-mute">1 taken · 2 open</span>
+          <Link href="/contact" className="btn">Apply for a slot</Link>
         </div>
       </section>
 
@@ -162,7 +162,7 @@ export default function HomePage() {
             <span className="mono ink-faint">/ 03</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            Four disciplines, one team
+            Four areas, one team
           </div>
         </div>
 
@@ -181,30 +181,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ MANIFESTO ============ */}
+      {/* ============ HOW WE THINK ============ */}
       <section className="frame py-28 max-md:py-16">
         <div className="grid grid-cols-12 gap-x-6 gap-y-12">
           <div className="col-span-12 md:col-span-6">
-            <span className="index">Manifesto</span>
+            <span className="index">How we think</span>
             <WordReveal
               as="h2"
               className="font-display leading-[0.96] tracking-[-0.03em] text-[clamp(2.4rem,1.6rem+2.6vw,4.6rem)] mt-6"
-              italic={[6, 7, 8, 9, 10, 11]}
-              signal={[8]}
+              italic={[5, 6, 7, 8]}
+              signal={[7]}
             >
-              We don&apos;t sell sprints. We sell things that survive their first quarter.
+              We do not just write code. We build software that lasts.
             </WordReveal>
           </div>
 
           <div className="col-span-12 md:col-span-5 md:col-start-8">
             <Reveal>
               <p className="text-base ink-mute mb-6 leading-relaxed">
-                Most software fails not at launch but at month four — when the demo wears off and the actual scale arrives. We design for that month. Founders on every commit, no juniors learning on your timeline, no agency-of-agency relay.
+                Most software does not fail on launch day. It fails three months later, when real users arrive and the early version starts to break. We plan for that month. Founders write the code, so there is no junior team learning on your project, and no agency passing your work to another agency.
               </p>
               <p className="text-base ink-mute leading-relaxed">
-                Every Friday you get a deploy and a one-page note. Every Monday we&apos;re in your standup. That&apos;s the whole rhythm.
+                Every Friday you get a new release and a short written update. Every Monday we join your stand-up. That is the full rhythm.
               </p>
-              <Link href="/about" className="btn btn-bare mt-8">Read the studio brief</Link>
+              <Link href="/about" className="btn btn-bare mt-8">Read about the studio</Link>
             </Reveal>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function HomePage() {
             <span className="mono ink-faint">/ 04</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            scope → shape → ship → sustain
+            plan → design → build → support
           </div>
         </div>
 
@@ -249,7 +249,7 @@ export default function HomePage() {
       <section className="frame py-28 max-md:py-16">
         <div className="grid grid-cols-12 gap-6 items-end hairline-b pb-4 mb-12">
           <div className="col-span-12 md:col-span-8 flex items-baseline gap-4">
-            <span className="index">Founders&apos; note</span>
+            <span className="index">From the founders</span>
             <span className="mono ink-faint">/ 05</span>
           </div>
         </div>
@@ -259,7 +259,7 @@ export default function HomePage() {
             <div className="col-span-12 md:col-span-10 md:col-start-2">
               <p className="font-display text-[clamp(1.8rem,1.2rem+2vw,3.4rem)] leading-[1.08] tracking-[-0.025em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
                 <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&ldquo;</span>
-                We spent years shipping software inside other people&apos;s companies. Codio is the studio we wished we could hire — small, senior, honest about scope. No portfolio yet, on purpose. The first three teams who trust us get our full attention and a price that reflects that.
+                We spent years building software inside other companies. Codio is the kind of studio we always wanted to hire — small, senior, and honest about scope. We do not have past projects to show yet. That is on purpose. The first three clients who trust us get our full attention and a clear, fair price.
                 <span className="signal font-display italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>&rdquo;</span>
               </p>
               <footer className="mt-8 hairline pt-5 flex flex-wrap items-baseline gap-3">
@@ -277,17 +277,17 @@ export default function HomePage() {
           <div className="bg-ink p-12 md:p-20 relative overflow-hidden">
             <div className="grid grid-cols-12 gap-6 items-end relative z-10">
               <div className="col-span-12 md:col-span-8">
-                <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 06 — outro ]</span>
+                <span className="mono" style={{ color: 'var(--color-paper-faint)' }}>[ 06 — start ]</span>
                 <h2 className="font-display mt-6 text-[clamp(2.6rem,1.4rem+4vw,6rem)] leading-[0.94] tracking-[-0.03em]" style={{ color: 'var(--color-paper)', fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                  Got something <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>worth building?</em>
+                  Have a project <em className="italic" style={{ color: 'var(--color-signal)', fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>worth building?</em>
                 </h2>
               </div>
               <div className="col-span-12 md:col-span-4 md:text-right">
                 <MagneticButton href="/contact" className="btn btn-signal">
-                  Apply to the cohort
+                  Apply for a slot
                 </MagneticButton>
                 <p className="mono mt-6" style={{ color: 'var(--color-paper-faint)' }}>
-                  hello@codio.studio · reply &lt; 24h
+                  hello@codio.studio · reply within 24h
                 </p>
               </div>
             </div>

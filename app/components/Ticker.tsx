@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 const ITEMS = [
-  'Open · founding cohort · 3 slots',
+  'Open · 3 project slots · 2026',
   'Web · Mobile · Cloud · Design',
-  'Remote-first · global engagements',
-  'First call → first commit · under 14 days',
-  '2026 — founding year',
+  'Remote-first · works with teams worldwide',
+  'First call to first code · under 14 days',
+  '2026 — year we started',
 ];
 
 export default function Ticker() {
@@ -16,13 +16,13 @@ export default function Ticker() {
   useEffect(() => {
     const update = () => {
       const d = new Date();
-      const sf = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Los_Angeles',
+      const ist = new Intl.DateTimeFormat('en-IN', {
+        timeZone: 'Asia/Kolkata',
         hour: '2-digit',
         minute: '2-digit',
         hour12: false,
       }).format(d);
-      setTime(`SF ${sf}`);
+      setTime(`IST ${ist}`);
     };
     update();
     const id = setInterval(update, 30_000);
@@ -30,7 +30,7 @@ export default function Ticker() {
   }, []);
 
   const dot = <span className="ticker-dot" aria-hidden="true" />;
-  const full = [...ITEMS, time || 'SF —— ——'];
+  const full = [...ITEMS, time || 'IST —— ——'];
 
   return (
     <div className="ticker">

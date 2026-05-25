@@ -34,12 +34,12 @@ export const metadata: Metadata = {
     template: '%s — Codio',
   },
   description:
-    'Codio is a small senior engineering studio. We design, build and ship durable software for ambitious teams — web, mobile, cloud.',
+    'Codio is a small senior software studio. We design, build, and deliver reliable software for teams that need it — web, mobile, and cloud.',
   keywords: ['software studio', 'web development', 'mobile apps', 'cloud engineering', 'product design'],
   authors: [{ name: 'Codio' }],
   openGraph: {
-    title: 'Codio — Engineering studio',
-    description: 'Senior software engineering, end-to-end. Web, mobile, cloud.',
+    title: 'Codio — Software studio',
+    description: 'Senior software engineering from start to finish. Web, mobile, and cloud.',
     type: 'website',
   },
 };

@@ -4,31 +4,31 @@ import WordReveal from '../components/WordReveal';
 import MagneticButton from '../components/MagneticButton';
 
 export const metadata: Metadata = {
-  title: 'Studio — Two founders, one inbox',
+  title: 'Studio — Two founders, one direct line',
   description:
-    'Codio is a brand-new senior engineering studio. Founder-only on every commit. Founding cohort open for 2026.',
+    'Codio is a new senior software studio. Founders write the code. Three project slots open for 2026.',
 };
 
 const VALUES = [
   {
     n: '01',
-    title: 'Ship over polish',
-    body: 'Real users teach more than reviews. We get a credible v1 in front of them quickly, then refine on signal — not in a vacuum.',
+    title: 'Ship working software, not slides',
+    body: 'A real user clicking a real button teaches us more than any document. We build a working version fast, put it in front of users, and improve it from there.',
   },
   {
     n: '02',
-    title: 'Maintainability is a feature',
-    body: 'Anyone can write code that works today. We write code your team can change six months from now without flinching.',
+    title: 'Easy to maintain after we leave',
+    body: 'Code that works today is the easy part. We write code your team can read, change, and extend six months later without calling us back.',
   },
   {
     n: '03',
-    title: 'Founder-only, end-to-end',
-    body: 'The person who scopes your project is the person who writes the code. No junior handoffs, no telephone game.',
+    title: 'Founders do the work',
+    body: 'The same person who talks to you in the first call is the one writing the code on day one. No junior team, no hand-offs.',
   },
   {
     n: '04',
-    title: 'Transparency by default',
-    body: 'You see our Linear board, our commits, our deploys. If something is slipping you hear it from us first — not at the next review.',
+    title: 'No surprises, no hidden status',
+    body: 'You see our task board, our commits, and our releases. If something is slipping, you hear it from us first — not at the next review meeting.',
   },
 ];
 
@@ -36,13 +36,13 @@ const FOUNDERS = [
   {
     initials: 'EN',
     role: 'Founder · Engineering',
-    bio: 'Backend, cloud, and platform work. A decade across SaaS, fintech, and infra teams — most recently as a staff engineer shipping production systems at scale.',
+    bio: 'Builds backends, cloud systems, and platforms. Around ten years of experience across SaaS, fintech, and infrastructure teams. Recently a senior engineer shipping production software at scale.',
     tag: 'Next.js · Node · AWS · Postgres',
   },
   {
     initials: 'DX',
     role: 'Founder · Design & Product',
-    bio: 'Product design and UX engineering. Years spent turning fuzzy briefs into shipped interfaces — consumer apps, B2B dashboards, design systems that survive a rewrite.',
+    bio: 'Designs interfaces and builds them in React. Years of work on consumer apps, business dashboards, and design systems that survive a full rewrite.',
     tag: 'Figma · React · Design Systems',
   },
 ];
@@ -63,21 +63,21 @@ export default function AboutPage() {
           italic={[4, 5, 6]}
           signal={[6]}
         >
-          Two founders. One inbox. No middle layer.
+          Two founders. One direct line. No middlemen.
         </WordReveal>
 
         <div className="grid grid-cols-12 gap-6 mt-12">
           <div className="col-span-12 md:col-span-5 md:col-start-2">
             <Reveal delay={250}>
               <p className="text-lg ink-mute leading-relaxed">
-                Codio is a brand-new senior engineering studio, founded in 2026 by two practitioners who spent the last decade shipping software inside other people&apos;s companies. We&apos;re starting deliberately small — founder-only on every commit — and opening a founding cohort of three engagements for our first year.
+                Codio is a new senior software studio, started in 2026 by two people who spent the last ten years building software inside other companies. We are staying small on purpose. For our first year, we are taking only three projects so each one gets full founder attention.
               </p>
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-4 md:col-start-9">
             <Reveal delay={400}>
               <p className="text-base ink-mute leading-relaxed">
-                Every project gets founder attention because there is no one for it to roll downhill to. The people you talk to in the first call are the people writing the code on day one — and on the last day too.
+                Every project is built by the founders, so nothing gets passed down to a junior team. The people you meet on the first call are the same people writing your code on day one — and on the final day.
               </p>
             </Reveal>
           </div>
@@ -87,10 +87,10 @@ export default function AboutPage() {
       {/* ============ NUMBERS STRIP ============ */}
       <section className="bg-paper-2 hairline hairline-b py-16 max-md:py-10">
         <div className="frame grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
-          <Num n="01" v="2" label="Founders on every commit" />
-          <Num n="02" v="3" label="Founding-cohort slots" />
-          <Num n="03" v="1" label="Reserved · 2 open" />
-          <Num n="04" v="2026" label="Founding year" />
+          <Num n="01" v="2" label="Founders on every project" />
+          <Num n="02" v="3" label="Total project slots for 2026" />
+          <Num n="03" v="2" label="Slots still open" />
+          <Num n="04" v="2026" label="Studio founded" />
         </div>
       </section>
 
@@ -102,7 +102,7 @@ export default function AboutPage() {
             <span className="mono ink-faint">/ 02</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            Four values · every project
+            Four rules · every project
           </div>
         </div>
 
@@ -137,7 +137,7 @@ export default function AboutPage() {
             <span className="mono ink-faint">/ 03</span>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right mono ink-mute">
-            People you actually work with
+            The people you actually work with
           </div>
         </div>
 
@@ -160,7 +160,7 @@ export default function AboutPage() {
         </div>
 
         <p className="mono ink-mute mt-10 max-w-[60ch]">
-          We&apos;ll add named bios and photos once the founding cohort is underway. For now, you get the work; the introductions happen on the first call.
+          Full names and photos will be added once our first projects begin. For now, you can see the work first. The introductions happen on the first call.
         </p>
       </section>
 
@@ -171,17 +171,17 @@ export default function AboutPage() {
             <div className="col-span-12 md:col-span-8">
               <span className="index">Work with us</span>
               <h2 className="font-display mt-6 text-[clamp(2.4rem,1.4rem+3vw,5rem)] leading-[0.95] tracking-[-0.03em]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40' }}>
-                Bring us in <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>early</em>. We&apos;ve seen both sides of the table.
+                Call us <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>early</em> or call us <em className="italic signal" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}>late</em>. We can help in both.
               </h2>
               <p className="text-base ink-mute mt-6 max-w-[55ch]">
-                Whether you are at the napkin-sketch stage or three sprints from launch, we can help. Every engagement starts with a 30-minute call.
+                Whether you have only an idea, or you are halfway through a build, we can help. Every project starts with a 30-minute call.
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:text-right">
               <MagneticButton href="/contact" className="btn btn-primary">
-                Apply to the cohort
+                Apply for a slot
               </MagneticButton>
-              <p className="mono ink-mute mt-6">Reply within one business day</p>
+              <p className="mono ink-mute mt-6">We reply within one working day</p>
             </div>
           </div>
         </Reveal>
